@@ -88,6 +88,13 @@ a.go:hover { transform: translateY(-2px); }
 .foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 22px clamp(18px, 4vw, 48px); border-top: 1px solid var(--line); font-size: 14px; color: var(--ink-2); }
 
 /* 첫 화면 보강: 상태, 바로가기, 숫자 */
+.pillars { margin-top: clamp(20px, 3.5vh, 32px); display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; opacity: 0; animation: fade 0.8s 0.75s forwards; }
+.pillars li { position: relative; padding: 14px 26px 4px 0; border-top: 2px solid var(--ink); }
+.pillars li + li { padding-left: 26px; }
+.pillars li + li::before { content: '+'; position: absolute; left: -9px; top: -15px; width: 18px; height: 26px; display: grid; place-items: center; background: var(--bg); font-family: var(--display); font-weight: 800; font-size: 22px; line-height: 1; }
+.pillars b { display: block; font-family: var(--display); font-weight: 800; font-size: clamp(18px, 1.6vw, 22px); letter-spacing: -0.02em; line-height: 1.3; }
+.badge { display: inline-block; vertical-align: 0.15em; margin-left: 6px; padding: 1px 9px; border-radius: 999px; background: var(--ink); color: #fff; font-family: var(--body); font-style: normal; font-size: 12px; font-weight: 700; letter-spacing: 0; line-height: 1.6; }
+.pillars span { display: block; margin-top: 6px; font-size: 15px; color: var(--ink-2); line-height: 1.6; }
 .top nav a.cta { color: var(--ink); font-weight: 700; border-bottom: 2px solid var(--ink); }
 .status { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--ink-2); margin-bottom: clamp(18px, 3vh, 28px); padding: 5px 14px 5px 12px; border: 1px solid var(--line); border-radius: 999px; background: #fff8; }
 .status .dot { width: 8px; height: 8px; border-radius: 50%; background: #1fae63; box-shadow: 0 0 0 4px #1fae6326; }
@@ -175,6 +182,10 @@ a.go:hover { transform: translateY(-2px); }
   .rules { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 900px) {
+  .pillars { grid-template-columns: 1fr; }
+  .pillars li, .pillars li + li { padding: 14px 0 10px; }
+  .pillars li + li { margin-top: 16px; }
+  .pillars li + li::before { left: 0; }
   .stats { grid-template-columns: 1fr 1fr; row-gap: 18px; }
   .stats > div:nth-child(3) { padding-left: 0; border-left: 0; }
   .how-head, .grid { grid-template-columns: 1fr; }
@@ -199,6 +210,6 @@ a.go:hover { transform: translateY(-2px); }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .hero .line > span, .lede, .index, .hook, .stats { animation: none; transform: none; opacity: 1; }
+  .hero .line > span, .lede, .index, .hook, .stats, .pillars { animation: none; transform: none; opacity: 1; }
   a.go { transition: none; }
 }
