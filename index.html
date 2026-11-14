@@ -168,20 +168,22 @@
       <article class="card card-agentlab">
         <div class="scene"><canvas aria-hidden="true"></canvas></div>
         <div class="copy">
-          <p class="kind">학습과 설계 도구 <span class="wip">개발 중</span></p>
+          <p class="kind">학습과 설계 도구 · 공개 서비스</p>
           <h2 id="agentlab-title">AgentLab</h2>
-          <p class="sum">AI 에이전트를 처음 배우는 사람부터 현업 엔지니어까지 쓰는 곳입니다. 노드를 끌어다 이으면 LangGraph 프로젝트가 만들어지고, 구조의 오류와 병목을 색으로 알려 줍니다.</p>
+          <p class="sum">AI 에이전트를 그려서 설계하고 배우는 작업 공간입니다. 노드를 끌어다 이으면 실행되는 LangGraph 코드가 만들어지고, Google 로그인으로 프로젝트를 저장하고 링크로 공유합니다.</p>
           <dl class="facts">
-            <div><dt>학습</dt><dd>8개 모듈, 43개 강의, 자동 채점 과제</dd></div>
-            <div><dt>플레이그라운드</dt><dd>패턴 12종, 코드 실시간 생성</dd></div>
-            <div><dt>구조 분석</dt><dd>오류는 빨강, 병목과 위험은 노랑</dd></div>
+            <div><dt>학습</dt><dd>8개 모듈, 43개 강의, 자동 채점 과제와 퀴즈</dd></div>
+            <div><dt>플레이그라운드</dt><dd>패턴 12종, 코드 실시간 생성, 오류는 빨강·병목은 노랑</dd></div>
+            <div><dt>실행 트레이스</dt><dd>노드별 State, LLM 메시지·도구 호출·토큰을 실시간 표시</dd></div>
+            <div><dt>프로젝트</dt><dd>자동 저장, 보기 전용 공유 링크, 내 공간으로 복제</dd></div>
           </dl>
           <ul class="wins">
-            <li><b>격리 실행</b> 사용자가 쓴 코드를 CPU·메모리·프로세스 수 제한, 타임아웃, 동시 실행 세마포어를 둔 FastAPI 샌드박스에서 돌립니다. API 키가 없어도 Mock LLM으로 실습할 수 있습니다.</li>
+            <li><b>격리 실행</b> 공개 서버에서 남의 Python을 돌리므로 실행마다 임시 디렉터리, CPU·메모리·프로세스 수 제한, 타임아웃, 동시 실행 상한, 사용자별 하루 한도를 둡니다. API 키가 없으면 Mock LLM으로 실습합니다.</li>
+            <li><b>검증한 것만</b> 강의 43개의 예제와 정답을 모두 실제로 실행해 확인하고, LLM이 고도화한 코드는 검증을 통과해야 캐시에 올립니다.</li>
           </ul>
-          <p class="role"><b>지금</b> 누구나 로그인해서 에이전트를 설계하고 저장할 수 있는 도구로 다듬고 있습니다.</p>
-          <ul class="tags"><li>Next.js</li><li>React Flow</li><li>Monaco</li><li>FastAPI</li><li>LangGraph</li><li>Docker</li></ul>
-          <p class="links"><a class="go" href="https://github.com/flashattention/learn-agent">GitHub 저장소</a></p>
+          <p class="role"><b>맡은 일</b> 커리큘럼과 제품 기획, 사용 경험 설계, 강의와 코드 검수. 구현은 AI 코딩 에이전트와 함께 했습니다.</p>
+          <ul class="tags"><li>Next.js</li><li>React Flow</li><li>FastAPI</li><li>LangGraph</li><li>Supabase</li><li>Cloud Run</li></ul>
+          <p class="links"><a class="go" href="https://agentlab-ai.vercel.app">직접 써 보기</a><a href="https://github.com/flashattention/agent-lab">GitHub 저장소</a></p>
         </div>
       </article>
     </section>
