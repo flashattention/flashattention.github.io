@@ -1,6 +1,175 @@
----
-layout: home
-author_profile: true
-sidebar:
-    nav: "categories"
----
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>전은배 — 포트폴리오</title>
+<meta name="description" content="LLM을 다루는 NLP 엔지니어 전은배의 포트폴리오. 젤리 게임즈, 젤리 서울 러너, Latent Atlas, AgentLab.">
+<meta property="og:title" content="전은배 — 포트폴리오">
+<meta property="og:description" content="기획하고, AI 에이전트와 만들고, 사람들에게 써 보게 합니다.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://flashattention.github.io/">
+<meta name="theme-color" content="#eef0f4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@400;600;800&family=Jua&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="/assets/portfolio/site.css">
+</head>
+<body>
+<a class="skip" href="#projects">프로젝트로 건너뛰기</a>
+
+<header class="top">
+  <a class="mark" href="/" aria-label="전은배 포트폴리오 처음으로">전은배</a>
+  <nav aria-label="주요 메뉴">
+    <a href="#projects">프로젝트</a>
+    <a href="#about">이력</a>
+    <a href="/notes/">학습 기록</a>
+    <a href="https://github.com/flashattention" rel="me">GitHub</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="hero-title">
+    <h1 id="hero-title">
+      <span class="line"><span>기획하고,</span></span>
+      <span class="line"><span>AI 에이전트와 만들고,</span></span>
+      <span class="line"><span>사람들에게 써 보게 합니다.</span></span>
+    </h1>
+    <p class="lede">LLM을 다루는 NLP 엔지니어 전은배입니다. 아래 네 프로젝트는 기획과 설계 판단, 검수를 제가 맡고 구현은 AI 코딩 에이전트와 함께 했습니다. 만든 뒤에는 사람들이 쓰는 모습을 보고 고쳤습니다.</p>
+    <ol class="index" aria-label="프로젝트 바로가기">
+      <li><a href="#jelly" data-c="jelly"><b>젤리 게임즈</b><span>링크 하나로 같이 하는 웹게임 20종</span></a></li>
+      <li><a href="#seoul" data-c="seoul"><b>젤리 서울 러너</b><span>실시간 데이터로 만든 서울 산책</span></a></li>
+      <li><a href="#atlas" data-c="atlas"><b>Latent Atlas</b><span>돌려 보는 머신러닝 도감</span></a></li>
+      <li><a href="#agentlab" data-c="agentlab"><b>AgentLab</b><span>에이전트를 배우고 설계하는 곳</span></a></li>
+    </ol>
+  </section>
+
+  <div id="projects" class="projects">
+
+    <section class="pin" id="jelly" data-scene="jelly" aria-labelledby="jelly-title">
+      <article class="card card-jelly">
+        <div class="scene"><canvas aria-hidden="true"></canvas></div>
+        <div class="copy">
+          <p class="kind">웹게임 모음</p>
+          <h2 id="jelly-title">젤리 게임즈</h2>
+          <p class="sum">설치도 가입도 없이 링크 하나로 친구와 같이 하는 곰돌이 젤리 웹게임 20종입니다. 3D 러너부터 팀 슈팅, 배틀로얄, 퍼즐, 끝말잇기까지 한 서버에서 돌아갑니다.</p>
+          <dl class="facts">
+            <div><dt>게임</dt><dd>20종</dd></div>
+            <div><dt>코드</dt><dd>JavaScript 약 41,000줄</dd></div>
+            <div><dt>의존성</dt><dd>2개 (three, ws)</dd></div>
+            <div><dt>에셋</dt><dd>이미지, 3D 모델, 음원 없이 전부 코드로 생성</dd></div>
+          </dl>
+          <p class="role"><b>맡은 일</b> 기획과 설계 판단, 플레이 테스트. 같은 반 동기 20여 명이 하는 모습을 매일 지켜보며 받은 100건 넘는 의견을 반영했고, 게임의 결을 해치는 요청은 걸러 냈습니다.</p>
+          <ul class="tags"><li>three.js</li><li>Node.js</li><li>WebSocket</li><li>Fly.io</li><li>Claude Code</li></ul>
+          <p class="links"><a class="go" href="https://jelly-city.fly.dev">게임 하러 가기</a><a href="https://github.com/flashattention/jelly-city">GitHub 저장소</a></p>
+        </div>
+      </article>
+    </section>
+
+    <section class="pin" id="seoul" data-scene="seoul" aria-labelledby="seoul-title">
+      <article class="card card-seoul">
+        <div class="scene"><canvas aria-hidden="true"></canvas></div>
+        <div class="copy">
+          <p class="kind">3D 러너와 오픈월드</p>
+          <h2 id="seoul-title">젤리 서울 러너</h2>
+          <p class="sum">20초마다 꿈이 바뀌는 기록 경쟁 러너 '드림 러너'에서 시작해, 실제 지도와 건축물대장, 실시간 공공데이터로 만든 서울 산책으로 넓혔습니다. 지하철과 버스가 실제 도착 정보대로 움직입니다.</p>
+          <dl class="facts">
+            <div><dt>서울</dt><dd>13개 지역, 2km 칸 201개를 이어 걷기</dd></div>
+            <div><dt>실시간</dt><dd>지하철 도착, 버스 위치, 날씨, 혼잡도</dd></div>
+            <div><dt>기록 검증</dt><dd>서버가 플레이를 처음부터 다시 돌려 확인</dd></div>
+            <div><dt>플레이</dt><dd>2,379판, 16.2시간 (2026년 11월 8일 기준)</dd></div>
+          </dl>
+          <p class="role"><b>맡은 일</b> 기획과 설계 판단, 스크린샷 검수. 플레이어 의견과 지표로 결정을 바꾸고, 바꾼 이유를 문서로 남겼습니다. 동기들에게 검증했을 때 반응이 가장 좋았던 게임이라 따로 키웠습니다.</p>
+          <ul class="tags"><li>three.js</li><li>OpenStreetMap</li><li>브이월드</li><li>서울 열린데이터광장</li><li>Claude Code</li></ul>
+          <p class="links"><a class="go" href="https://jelly-city.fly.dev/seoul-walk/">서울 걸으러 가기</a><a href="https://jelly-city.fly.dev/dream-runner/">드림 러너</a><a href="https://github.com/flashattention/jelly-city">GitHub 저장소</a></p>
+        </div>
+      </article>
+    </section>
+
+    <section class="pin" id="atlas" data-scene="atlas" aria-labelledby="atlas-title">
+      <article class="card card-atlas">
+        <div class="scene"><canvas aria-hidden="true"></canvas></div>
+        <div class="copy">
+          <p class="kind">학습 사이트</p>
+          <h2 id="atlas-title">Latent Atlas</h2>
+          <p class="sum">선형 회귀부터 Mamba까지, 머신러닝 개념을 돌려 볼 수 있는 3D 그림으로 정리한 도감입니다. 개념마다 설명, 쓰임새, 산업 사례, Python 코드가 붙어 있습니다.</p>
+          <dl class="facts">
+            <div><dt>개념</dt><dd>294개, 18장</dd></div>
+            <div><dt>부록</dt><dd>용어 150개, 7장</dd></div>
+            <div><dt>언어</dt><dd>12개</dd></div>
+            <div><dt>그림</dt><dd>전부 회전하는 3D</dd></div>
+          </dl>
+          <p class="role"><b>맡은 일</b> 콘텐츠 구성과 기획, 사용 경험 개선. 설명과 코드를 여러 차례 직접 검수했고, 구현은 AI에 맡겼습니다.</p>
+          <ul class="tags"><li>three.js</li><li>Python 빌드</li><li>Vercel</li></ul>
+          <p class="links"><a class="go" href="https://latent-atlas-pied.vercel.app/">도감 펼치기</a><a href="https://github.com/flashattention/latent-atlas">GitHub 저장소</a></p>
+        </div>
+      </article>
+    </section>
+
+    <section class="pin" id="agentlab" data-scene="agentlab" aria-labelledby="agentlab-title">
+      <article class="card card-agentlab">
+        <div class="scene"><canvas aria-hidden="true"></canvas></div>
+        <div class="copy">
+          <p class="kind">학습과 설계 도구 <span class="wip">개발 중</span></p>
+          <h2 id="agentlab-title">AgentLab</h2>
+          <p class="sum">AI 에이전트를 처음 배우는 사람부터 현업 엔지니어까지 쓰는 곳입니다. 노드를 끌어다 이으면 LangGraph 프로젝트가 만들어지고, 구조의 오류와 병목을 색으로 알려 줍니다.</p>
+          <dl class="facts">
+            <div><dt>학습</dt><dd>8개 모듈, 40여 개 강의, 자동 채점</dd></div>
+            <div><dt>플레이그라운드</dt><dd>패턴 12종, 코드 실시간 생성</dd></div>
+            <div><dt>구조 분석</dt><dd>오류는 빨강, 병목과 위험은 노랑</dd></div>
+            <div><dt>실행</dt><dd>격리된 샌드박스, 키 없이는 Mock LLM</dd></div>
+          </dl>
+          <p class="role"><b>지금</b> 누구나 로그인해서 에이전트를 설계하고 저장할 수 있는 도구로 다듬는 중입니다.</p>
+          <ul class="tags"><li>Next.js</li><li>React Flow</li><li>Monaco</li><li>FastAPI</li><li>LangGraph</li></ul>
+          <p class="links"><a class="go" href="https://github.com/flashattention/learn-agent">GitHub 저장소</a></p>
+        </div>
+      </article>
+    </section>
+
+  </div>
+
+  <section class="about" id="about" aria-labelledby="about-title">
+    <h2 id="about-title">이력</h2>
+    <div class="cols">
+      <div>
+        <h3>연구</h3>
+        <ul>
+          <li><b>Scientific Reports 게재</b><span>BERT 앙상블 기반 한국어·영어 혐오 표현 탐지 (학부 연구)</span></li>
+          <li><b>서강대학교 NLP &amp; ISDS Lab 연구 인턴</b><span>한국 문화 이해도 평가용 VQA 데이터셋 구축, VLM 평가</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>수상</h3>
+        <ul>
+          <li><b>한국정보기술학회 하계 대학생 논문 경진대회 우수상</b><span>2025, 스토리포인트 예측 플랫폼 SPEIS</span></li>
+          <li><b>JBNU SW/AI 경진대회 AI 전공자 부문 은상</b><span>2025, 팀 수상</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>배움</h3>
+        <ul>
+          <li><b>SK AX SKALA</b><span>채용 연계형 AI 인재 양성 과정, 2026</span></li>
+          <li><b>전북대학교 소프트웨어공학과</b><span>졸업</span></li>
+          <li><b>SQLD, OPIc AL</b><span>자격과 어학</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="notes" aria-labelledby="notes-title">
+    <h2 id="notes-title">학습 기록</h2>
+    <p>머신러닝 기초부터 NLP까지 공부하며 정리한 글은 따로 모아 두었습니다.</p>
+    <a class="go" href="/notes/">학습 기록 읽기</a>
+  </section>
+</main>
+
+<footer class="foot">
+  <span>전은배</span>
+  <a href="https://github.com/flashattention" rel="me">github.com/flashattention</a>
+</footer>
+
+<script src="/assets/portfolio/site.js" defer></script>
+</body>
+</html>
