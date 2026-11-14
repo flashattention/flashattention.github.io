@@ -159,9 +159,16 @@ a.go:hover { transform: translateY(-2px); }
   .wins li { font-size: 14px; line-height: 1.55; }
   .role { font-size: 14px; }
 }
+/* 글이 넘칠 때 (site.js의 fit) */
+.pin.dense .card .tags { display: none; }
+.pin.dense .sum { font-size: 15px; }
+.pin.dense .wins li { font-size: 13.5px; line-height: 1.5; }
+.pin.dense .facts > div { padding: 4px 0; }
+.pin.unpin { height: auto; margin-bottom: 18px; }
+.pin.unpin .card { position: relative; top: 0; height: auto; }
+.pin.unpin .copy { overflow: visible; }
 @media (min-width: 901px) and (max-height: 860px) {
   .card { grid-template-columns: minmax(0, 0.95fr) minmax(400px, 1.05fr); }
-  .card .tags { display: none; }
   .card h2 { font-size: clamp(28px, 3.2vw, 44px); }
 }
 @media (max-width: 1100px) {

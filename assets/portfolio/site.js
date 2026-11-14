@@ -16,13 +16,19 @@
   const jelly = {
     colors: ['#ff7aa2', '#ffb347', '#ffe066', '#8ce0b0', '#7cc8ff', '#b79cff', '#ff9ecb', '#9be7e0'],
     layout(s, w, h) {
-      const cols = w > h * 1.15 ? 5 : 4, rows = Math.ceil(21 / cols);
-      const cell = Math.min(w / (cols + 0.9), h / (rows + 0.9));
-      const ox = (w - cell * cols) / 2 + cell / 2, oy = (h - cell * rows) / 2 + cell / 2;
+      // 21개를 4개·3개 줄이 번갈아 가는 벌집 모양(6줄)으로 놓는다
+      const rows = 6, gap = 0.9;
+      const cell = Math.min(w / 4.9, h / ((rows - 1) * gap + 1.9));
+      const oy = (h - cell * (rows - 1) * gap) / 2;
+      const spots = [];
+      for (let row = 0; row < rows; row++) {
+        const n = row % 2 ? 3 : 4, ox = w / 2 - (cell * (n - 1)) / 2;
+        for (let k = 0; k < n; k++) spots.push([ox + k * cell, oy + row * cell * gap]);
+      }
       const r = rng(7);
       s.cell = cell;
-      s.blobs = Array.from({ length: 21 }, (_, i) => ({
-        tx: ox + (i % cols) * cell, ty: oy + Math.floor(i / cols) * cell,
+      s.blobs = spots.map(([tx, ty], i) => ({
+        tx, ty,
         y: -cell * (1 + r() * 3), vy: 0, x: 0, vx: 0,
         gate: 0.04 + r() * 0.5, color: this.colors[i % this.colors.length], ph: r() * 6.28, wink: r(),
       }));
@@ -273,9 +279,25 @@
     sc.def.layout?.(sc.state, sc.w, sc.h);
   }
 
+  // 카드 글이 화면 높이를 넘으면 카드 안에 스크롤을 만들지 않는다.
+  // 먼저 촘촘하게(dense) 줄여 보고, 그래도 넘치면 그 카드만 고정을 풀어(unpin) 글 길이대로 늘린다.
+  function fit() {
+    for (const pin of document.querySelectorAll('.pin')) {
+      const card = pin.querySelector('.card'), copy = pin.querySelector('.copy');
+      pin.classList.remove('dense', 'unpin');
+      if (!pinned.matches) continue;
+      const over = () => copy.scrollHeight > copy.clientHeight + 1;
+      if (over()) pin.classList.add('dense');
+      if (over()) pin.classList.add('unpin');
+    }
+  }
+  fit();
+  addEventListener('resize', fit);
+  document.fonts?.ready.then(fit);
+
   function progress(sc) {
     const r = sc.pin.getBoundingClientRect(), vh = window.innerHeight;
-    if (pinned.matches) return clamp((vh * 0.5 - r.top) / (r.height - vh * 0.5));
+    if (pinned.matches && !sc.pin.classList.contains('unpin')) return clamp((vh * 0.5 - r.top) / (r.height - vh * 0.5));
     const cr = sc.canvas.getBoundingClientRect();
     return clamp((vh * 0.95 - cr.top) / (vh * 0.75));
   }
