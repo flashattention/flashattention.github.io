@@ -6,7 +6,7 @@ AI 코딩 에이전트와 함께 만든 프로젝트, 일하는 방식, 연구�
 
 | 주소 | 내용 |
 |---|---|
-| [`/`](https://flashattention.github.io/) | 포트폴리오. 대표 프로젝트 4개(젤리 게임즈, 젤리 서울 러너, Latent Atlas, AgentLab), AI 에이전트와 일하는 방식, 그 밖의 프로젝트, 이력, 연락처 |
+| [`/`](https://flashattention.github.io/) | 포트폴리오. 대표 프로젝트 4개(젤리 게임즈, AgentLab, 젤리 서울 러너, Latent Atlas), AI 에이전트와 일하는 방식, 그 밖의 프로젝트, 이력, 연락처 |
 | [`/resume/`](https://flashattention.github.io/resume/) | A4 2쪽 이력서. 브라우저의 인쇄 버튼으로 PDF 저장 |
 | `/about/` | 포트폴리오의 이력 섹션(`/#about`)으로 이동 |
 | `/categories/…`, 각 글 주소 | 예전에 쓴 머신러닝·NLP 학습 글 (`_posts/`) |
