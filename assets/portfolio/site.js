@@ -213,7 +213,7 @@
     edges: [['START', 'planner', 0.1], ['planner', 'tools', 0.24], ['planner', 'retriever', 0.36], ['tools', 'check', 0.49], ['retriever', 'check', 0.49], ['check', 'END', 0.63], ['check', 'planner', 0.76, 1]],
     code: [[0.13, 'g.add_node("planner", planner)'], [0.27, 'g.add_node("tools", ToolNode(tools))'], [0.39, 'g.add_node("retriever", retrieve)'], [0.52, 'g.add_node("check", check)'], [0.76, 'g.add_conditional_edges("check", route)'], [0.9, 'app = g.compile(recursion_limit=6)']],
     draw(c, w, h, p, t) {
-      c.fillStyle = 'rgba(125,162,255,.16)';
+      c.fillStyle = 'rgba(255,255,255,.12)';
       for (let x = 14; x < w; x += 24) for (let y = 14; y < h; y += 24) c.fillRect(x, y, 1.5, 1.5);
       const fs = clamp(w * 0.021, 11, 16), nw = fs * 7.4, nh = fs * 3.3, top = h * 0.06, area = h * 0.66;
       const pos = Object.fromEntries(this.nodes.map((n) => [n.id, [n.x * w, top + n.y * area]]));
@@ -227,16 +227,16 @@
         else { const mx = (x1 + x2) / 2; path.moveTo(x1, y1); path.bezierCurveTo(mx, y1, mx, y2, x2, y2); }
         const L = Math.hypot(x2 - x1, y2 - y1) * (loop ? 2.4 : 1.25);
         c.setLineDash([L * k, L]); c.lineWidth = 2;
-        c.strokeStyle = loop ? (fixed ? '#59d39a' : '#ffc24b') : '#5d79c9'; c.stroke(path);
+        c.strokeStyle = loop ? (fixed ? '#34d399' : '#fbbf24') : '#5a5a5a'; c.stroke(path);
         if (k >= 1 && p > 0.66) { // 실행 흐름
-          c.setLineDash([6, L]); c.lineDashOffset = -((t * 90 + te * 400) % L); c.strokeStyle = '#e6ebff'; c.lineWidth = 3; c.stroke(path); c.lineDashOffset = 0;
+          c.setLineDash([6, L]); c.lineDashOffset = -((t * 90 + te * 400) % L); c.strokeStyle = '#ffffff'; c.lineWidth = 3; c.stroke(path); c.lineDashOffset = 0;
         }
         c.setLineDash([]);
         if (loop && k >= 1) {
           const label = fixed ? '재시도 상한 6회' : '경고: 재시도 상한 없음';
           c.font = `600 ${fs * 0.86}px ${FONT}`; const tw = c.measureText(label).width + 16, lx = (x1 + x2) / 2 - tw / 2, ly = y1 + area * 0.47;
-          c.fillStyle = fixed ? '#1d3b33' : '#4a3a12'; rr(c, lx, ly, tw, fs * 1.7, 6); c.fill();
-          c.fillStyle = fixed ? '#7be3b3' : '#ffc24b'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(label, lx + tw / 2, ly + fs * 0.88);
+          c.fillStyle = fixed ? '#0f2a20' : '#2e2408'; rr(c, lx, ly, tw, fs * 1.7, 6); c.fill();
+          c.fillStyle = fixed ? '#34d399' : '#fbbf24'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(label, lx + tw / 2, ly + fs * 0.88);
         }
       }
       // 노드
@@ -244,22 +244,22 @@
         const k = ease(n.t, n.t + 0.08, p); if (k <= 0) continue;
         const [x, y] = pos[n.id], sc = 0.7 + 0.3 * k, ww = (n.io ? nw * 0.62 : nw) * sc, hh = (n.io ? nh * 0.7 : nh) * sc;
         c.globalAlpha = k;
-        c.fillStyle = n.io ? '#1c2440' : '#182039'; rr(c, x - ww / 2, y - hh / 2, ww, hh, n.io ? hh / 2 : 9); c.fill();
-        c.lineWidth = 1.5; c.strokeStyle = n.id === 'check' && p > 0.76 && !fixed ? '#ffc24b' : '#4a62ad'; c.stroke();
-        c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#e6ebff';
+        c.fillStyle = n.io ? '#161616' : '#0a0a0a'; rr(c, x - ww / 2, y - hh / 2, ww, hh, n.io ? hh / 2 : 9); c.fill();
+        c.lineWidth = 1.5; c.strokeStyle = n.id === 'check' && p > 0.76 && !fixed ? '#fbbf24' : '#3a3a3a'; c.stroke();
+        c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillStyle = '#fafafa';
         c.font = `700 ${fs}px ${MONO}`; c.fillText(n.id, x, n.sub ? y - fs * 0.45 : y);
-        if (n.sub) { c.fillStyle = '#98a3c7'; c.font = `500 ${fs * 0.8}px ${FONT}`; c.fillText(n.sub, x, y + fs * 0.7); }
+        if (n.sub) { c.fillStyle = '#8c8c8c'; c.font = `500 ${fs * 0.8}px ${FONT}`; c.fillText(n.sub, x, y + fs * 0.7); }
         c.globalAlpha = 1;
       }
       // 실시간으로 생성되는 코드
       const lines = this.code.filter(([te]) => p > te), lh = fs * 1.65, ph = lh * 6 + 16, py = h - ph - h * 0.04, px = w * 0.045, pw = Math.min(w * 0.91, fs * 30);
-      c.fillStyle = 'rgba(8,11,22,.82)'; rr(c, px, py, pw, ph, 10); c.fill(); c.strokeStyle = '#29324f'; c.lineWidth = 1; c.stroke();
+      c.fillStyle = 'rgba(13,13,13,.9)'; rr(c, px, py, pw, ph, 10); c.fill(); c.strokeStyle = '#242424'; c.lineWidth = 1; c.stroke();
       c.font = `500 ${fs * 0.88}px ${MONO}`; c.textAlign = 'left'; c.textBaseline = 'top';
       lines.forEach(([, text], i) => {
-        c.fillStyle = '#5a668c'; c.fillText(String(i + 1).padStart(2, ' '), px + 12, py + 10 + i * lh);
-        c.fillStyle = i === lines.length - 1 ? '#e6ebff' : '#a8b4dc'; c.fillText(text, px + 12 + fs * 2, py + 10 + i * lh);
+        c.fillStyle = '#555555'; c.fillText(String(i + 1).padStart(2, ' '), px + 12, py + 10 + i * lh);
+        c.fillStyle = i === lines.length - 1 ? '#ffffff' : '#a3a3a3'; c.fillText(text, px + 12 + fs * 2, py + 10 + i * lh);
       });
-      if (lines.length < 6 && Math.sin(t * 6) > 0) { c.fillStyle = '#7da2ff'; c.fillRect(px + 12 + fs * 2, py + 10 + lines.length * lh, fs * 0.5, fs); }
+      if (lines.length < 6 && Math.sin(t * 6) > 0) { c.fillStyle = '#ffffff'; c.fillRect(px + 12 + fs * 2, py + 10 + lines.length * lh, fs * 0.5, fs); }
     },
   };
 

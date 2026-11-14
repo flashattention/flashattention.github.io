@@ -43,7 +43,7 @@ ul, ol { list-style: none; }
 .index [data-c='jelly'] { --c: #ff5d8f; }
 .index [data-c='seoul'] { --c: #f08a24; }
 .index [data-c='atlas'] { --c: #1f6f8b; }
-.index [data-c='agentlab'] { --c: #3f6cf0; }
+.index [data-c='agentlab'] { --c: #0a0a0a; }
 
 /* 프로젝트: 화면에 붙어 있는 동안 스크롤이 장면을 움직인다 */
 .projects { padding: 0 clamp(10px, 2vw, 28px); }
@@ -74,7 +74,7 @@ a.go:hover { transform: translateY(-2px); }
 .card-seoul { --card-bg: #0d1430; --card-ink: #f1f3ff; --card-muted: #a9b2d6; --card-line: #2a3564; --card-accent: #ffc857; --card-on-accent: #1a1405; }
 .card-atlas { --card-bg: #e9f0ee; --card-ink: #14303f; --card-muted: #4e6873; --card-line: #c2d2d0; --card-accent: #17627c; }
 .card-atlas h2 { font-weight: 600; }
-.card-agentlab { --card-bg: #0f1424; --card-ink: #e6ebff; --card-muted: #98a3c7; --card-line: #29324f; --card-accent: #7da2ff; --card-on-accent: #0b1020; --card-warn: #ffc24b; --card-display: 'JetBrains Mono', ui-monospace, monospace; }
+.card-agentlab { --card-bg: #000000; --card-ink: #fafafa; --card-muted: #8c8c8c; --card-line: #242424; --card-accent: #ffffff; --card-on-accent: #000000; --card-warn: #fbbf24; --card-display: 'JetBrains Mono', ui-monospace, monospace; }
 .card-agentlab h2 { font-weight: 700; letter-spacing: -0.04em; }
 
 /* 이력 */
