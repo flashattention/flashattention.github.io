@@ -3,9 +3,6 @@ main:
   - title: "포트폴리오"
     url: /
 
-  - title: "학습 기록"
-    url: /notes/
-
   - title: "About"
     url: /about/
 

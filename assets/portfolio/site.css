@@ -78,15 +78,13 @@ a.go:hover { transform: translateY(-2px); }
 .card-agentlab h2 { font-weight: 700; letter-spacing: -0.04em; }
 
 /* 이력 */
-.about, .notes { max-width: 1320px; margin: 0 auto; padding: clamp(64px, 12vh, 140px) clamp(18px, 4vw, 48px) 0; }
-.about h2, .notes h2 { font-family: var(--display); font-weight: 800; font-size: clamp(30px, 4vw, 52px); letter-spacing: -0.03em; margin-bottom: clamp(20px, 4vh, 40px); }
+.about { max-width: 1320px; margin: 0 auto; padding: clamp(64px, 12vh, 140px) clamp(18px, 4vw, 48px); }
+.about h2 { font-family: var(--display); font-weight: 800; font-size: clamp(30px, 4vw, 52px); letter-spacing: -0.03em; margin-bottom: clamp(20px, 4vh, 40px); }
 .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 3vw, 48px); }
 .cols h3 { font-size: 15px; font-weight: 600; color: var(--ink-2); padding-bottom: 10px; border-bottom: 1px solid var(--ink); }
 .cols li { padding: 14px 0; border-bottom: 1px solid var(--line); }
 .cols b { display: block; font-weight: 700; line-height: 1.4; }
 .cols span { display: block; font-size: 15px; color: var(--ink-2); margin-top: 2px; }
-.notes { padding-bottom: clamp(64px, 12vh, 140px); }
-.notes p { max-width: 52ch; color: var(--ink-2); margin-bottom: 20px; }
 .foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 22px clamp(18px, 4vw, 48px); border-top: 1px solid var(--line); font-size: 14px; color: var(--ink-2); }
 
 /* 좁은 화면: 고정하지 않고 위에서 아래로 */
