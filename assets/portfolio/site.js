@@ -12,17 +12,19 @@
   const MONO = "'JetBrains Mono', ui-monospace, monospace";
   const rr = (c, x, y, w, h, r) => { c.beginPath(); c.roundRect(x, y, w, h, r); };
 
-  // ---------- 젤리 게임즈: 게임 21종이 젤리처럼 떨어져 자리를 잡는다 ----------
+  // ---------- 젤리 게임즈: 게임 수만큼 젤리가 떨어져 자리를 잡는다 (수는 data-stat="jelly.games", 매일 아침 갱신) ----------
+  const GAMES = parseInt(document.querySelector('[data-stat="jelly.games"]')?.textContent, 10) || 21;
   const jelly = {
     colors: ['#ff7aa2', '#ffb347', '#ffe066', '#8ce0b0', '#7cc8ff', '#b79cff', '#ff9ecb', '#9be7e0'],
     layout(s, w, h) {
-      // 21개를 4개·3개 줄이 번갈아 가는 벌집 모양(6줄)으로 놓는다
-      const rows = 6, gap = 0.9;
+      // 4개·3개 줄이 번갈아 가는 벌집 모양으로 놓는다 (21개면 6줄)
+      const rowSizes = []; for (let left = GAMES; left > 0; ) { const n = Math.min(left, rowSizes.length % 2 ? 3 : 4); rowSizes.push(n); left -= n; }
+      const rows = rowSizes.length, gap = 0.9;
       const cell = Math.min(w / 4.9, h / ((rows - 1) * gap + 1.9));
       const oy = (h - cell * (rows - 1) * gap) / 2;
       const spots = [];
       for (let row = 0; row < rows; row++) {
-        const n = row % 2 ? 3 : 4, ox = w / 2 - (cell * (n - 1)) / 2;
+        const n = rowSizes[row], ox = w / 2 - (cell * (n - 1)) / 2;
         for (let k = 0; k < n; k++) spots.push([ox + k * cell, oy + row * cell * gap]);
       }
       const r = rng(7);
@@ -61,7 +63,7 @@
       }
       const n = s.blobs.filter((b) => p > b.gate).length;
       c.fillStyle = '#b0577a'; c.font = `600 ${Math.max(13, w * 0.022)}px ${FONT}`; c.textAlign = 'left'; c.textBaseline = 'bottom';
-      c.fillText(`${n} / 21`, w * 0.045, h - h * 0.04);
+      c.fillText(`${n} / ${GAMES}`, w * 0.045, h - h * 0.04);
     },
   };
 

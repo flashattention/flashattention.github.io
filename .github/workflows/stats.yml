@@ -1,0 +1,45 @@
+# 매일 아침 프로젝트 저장소(jelly-city, agent-lab, latent-atlas)에서 사이트 수치를 다시 계산하고,
+# 바뀐 값이 있을 때만 커밋한다. 푸시하면 GitHub Pages가 다시 배포한다.
+name: 사이트 수치 갱신
+
+on:
+  schedule:
+    - cron: '7 23 * * *'   # 매일 08:07 한국 시간 (cron은 UTC 기준. 정각은 스케줄러가 붐벼 늦어지기 쉽다)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: stats
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: 프로젝트 저장소 받기
+        run: |
+          mkdir -p "$RUNNER_TEMP/repos"
+          for r in jelly-city agent-lab latent-atlas; do
+            # 커밋 수를 세려면 전체 이력이 필요하다. 파일 내용은 현재 버전만 받는다.
+            git clone --quiet --filter=blob:none "https://github.com/flashattention/$r.git" "$RUNNER_TEMP/repos/$r"
+          done
+
+      - name: 수치 계산과 페이지 반영
+        run: node scripts/update-stats.mjs "$RUNNER_TEMP/repos/jelly-city" "$RUNNER_TEMP/repos/agent-lab" "$RUNNER_TEMP/repos/latent-atlas"
+
+      - name: 바뀌었으면 커밋
+        run: |
+          if git diff --quiet; then echo "변경 없음"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "사이트 수치 자동 갱신 ($(TZ=Asia/Seoul date '+%Y-%m-%d %H:%M'))"
+          git push

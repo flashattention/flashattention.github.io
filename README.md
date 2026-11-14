@@ -54,9 +54,25 @@ bundle exec jekyll serve
 
 `main` 브랜치에 푸시하면 GitHub Pages가 Jekyll로 빌드해 배포합니다. 보통 1~2분 걸립니다.
 
-## 수치 기준
+## 수치 기준 (매일 아침 자동 갱신)
 
-카드와 이력서의 숫자는 각 프로젝트 저장소와 운영 기록 기준입니다. 젤리 게임즈 규모·커밋 수는 2026-11-12, 드림 러너 플레이 수는 2026-11-08 기준이고, 바뀌면 `index.html`과 `resume/index.html`을 함께 고칩니다.
+첫 화면과 카드, 이력서의 숫자 중 저장소에서 다시 셀 수 있는 것은 `.github/workflows/stats.yml`이 매일 아침 8시(한국 시간)에 `scripts/update-stats.mjs`로 다시 계산합니다. 값이 바뀌었을 때만 `github-actions[bot]`이 커밋하고, 그 푸시로 GitHub Pages가 다시 배포됩니다. 계산한 값은 [`assets/portfolio/stats.json`](assets/portfolio/stats.json)에도 남깁니다.
+
+HTML에서는 `<span data-stat="키">값</span>`의 내용과, `data-tpl="…{키}…"`가 붙은 `<meta>`의 `content`만 바뀝니다. 새 숫자를 자동으로 바꾸려면 같은 형식으로 감싸고 스크립트에 키를 추가합니다.
+
+| 키 | 출처 |
+|---|---|
+| `jelly.games` | jelly-city `public/index.html`의 게임 카드 수 (서울 산책은 드림 러너의 맵이라 제외) |
+| `jelly.days` | jelly-city 첫 커밋 날짜부터 마지막 커밋 날짜까지 일수 (양 끝 포함, 한국 시간) |
+| `jelly.commits`, `jelly.agent`, `jelly.asof` | jelly-city 전체 커밋 수, 그중 `Co-Authored-By: Claude` 트레일러가 있는 커밋 수, 마지막 커밋 날짜 |
+| `jelly.lines` | jelly-city의 `.js`·`.mjs`·`.cjs` 줄 수, 천 단위 내림 |
+| `jelly.plays`, `jelly.hours`, `jelly.lb*`, `jelly.mdate` | jelly-city `docs/metrics.md` (운영 서버에서 `tools/metrics.mjs`로 뽑아 커밋할 때 바뀝니다) |
+| `seoul.gu`, `seoul.tiles` | `public/dream-runner/hangang/seoul.json`의 구 수, `seoul/index.json`의 칸 수 |
+| `seoul.buildings`, `seoul.shops` | 칸 지도 파일에서 서울 경계 안 건물 수와 그 건물에 연결된 가게 수, 만 단위 내림 |
+| `agentlab.*` | agent-lab `frontend/content/learn`의 모듈·강의 수, `patterns.ts`의 패턴 수 |
+| `atlas.*` | latent-atlas `src/registry.js`의 장·개념 수(`z`로 시작하는 장은 부록), `content/terms`의 언어 수 |
+
+저장소에서 셀 수 없는 숫자(데이터 9종·실시간 API 4종, 지표를 보고 결정한 당시의 숫자 71%·8% 같은 과거 기록, 논문·학점 등)는 손으로 고칩니다. 스케줄 실행은 GitHub 사정에 따라 몇 분에서 수십 분 늦을 수 있고, Actions 탭에서 **사이트 수치 갱신 → Run workflow**로 바로 돌릴 수 있습니다.
 
 ## 라이선스
 
