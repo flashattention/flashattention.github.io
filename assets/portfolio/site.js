@@ -2,7 +2,7 @@
 (() => {
   'use strict';
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const pinned = matchMedia('(min-width: 901px) and (min-height: 601px)');
+  const pinned = matchMedia('(min-width: 901px) and (min-height: 700px)');
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
   const lerp = (a, b, t) => a + (b - a) * t;
   const ease = (a, b, v) => { const t = clamp((v - a) / (b - a)); return t * t * (3 - 2 * t); };
@@ -12,16 +12,16 @@
   const MONO = "'JetBrains Mono', ui-monospace, monospace";
   const rr = (c, x, y, w, h, r) => { c.beginPath(); c.roundRect(x, y, w, h, r); };
 
-  // ---------- 젤리 게임즈: 게임 20종이 젤리처럼 떨어져 자리를 잡는다 ----------
+  // ---------- 젤리 게임즈: 게임 21종이 젤리처럼 떨어져 자리를 잡는다 ----------
   const jelly = {
     colors: ['#ff7aa2', '#ffb347', '#ffe066', '#8ce0b0', '#7cc8ff', '#b79cff', '#ff9ecb', '#9be7e0'],
     layout(s, w, h) {
-      const cols = w > h * 1.15 ? 5 : 4, rows = 20 / cols;
+      const cols = w > h * 1.15 ? 5 : 4, rows = Math.ceil(21 / cols);
       const cell = Math.min(w / (cols + 0.9), h / (rows + 0.9));
       const ox = (w - cell * cols) / 2 + cell / 2, oy = (h - cell * rows) / 2 + cell / 2;
       const r = rng(7);
       s.cell = cell;
-      s.blobs = Array.from({ length: 20 }, (_, i) => ({
+      s.blobs = Array.from({ length: 21 }, (_, i) => ({
         tx: ox + (i % cols) * cell, ty: oy + Math.floor(i / cols) * cell,
         y: -cell * (1 + r() * 3), vy: 0, x: 0, vx: 0,
         gate: 0.04 + r() * 0.5, color: this.colors[i % this.colors.length], ph: r() * 6.28, wink: r(),
@@ -55,7 +55,7 @@
       }
       const n = s.blobs.filter((b) => p > b.gate).length;
       c.fillStyle = '#b0577a'; c.font = `600 ${Math.max(13, w * 0.022)}px ${FONT}`; c.textAlign = 'left'; c.textBaseline = 'bottom';
-      c.fillText(`${n} / 20`, w * 0.045, h - h * 0.04);
+      c.fillText(`${n} / 21`, w * 0.045, h - h * 0.04);
     },
   };
 

@@ -3,8 +3,8 @@ main:
   - title: "포트폴리오"
     url: /
 
-  - title: "About"
-    url: /about/
+  - title: "이력서"
+    url: /resume/
 
   - title: "GitHub"
     url: https://github.com/flashattention

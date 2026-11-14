@@ -51,7 +51,7 @@ ul, ol { list-style: none; }
 .card { position: sticky; top: calc(var(--top) + 8px); height: calc(100vh - var(--top) - 24px); min-height: 520px; border-radius: 28px; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(340px, 0.9fr); background: var(--card-bg); color: var(--card-ink); }
 .scene { position: relative; min-height: 0; background: var(--scene-bg, transparent); }
 .scene canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-.copy { padding: clamp(22px, 3.2vw, 48px); display: flex; flex-direction: column; justify-content: center; gap: clamp(10px, 1.6vh, 18px); overflow: auto; min-height: 0; }
+.copy { padding: clamp(22px, 3.2vw, 48px); display: flex; flex-direction: column; justify-content: safe center; gap: clamp(8px, 1.4vh, 16px); overflow: auto; min-height: 0; }
 .kind { font-size: 14px; font-weight: 600; color: var(--card-accent); display: flex; align-items: center; gap: 10px; }
 .wip { font-size: 12px; font-weight: 700; color: var(--card-bg); background: var(--card-warn, var(--card-accent)); padding: 1px 8px; border-radius: 999px; }
 .card h2 { font-family: var(--card-display, var(--display)); font-weight: 800; font-size: clamp(34px, 4.4vw, 64px); line-height: 1.08; letter-spacing: -0.03em; }
@@ -87,8 +87,99 @@ a.go:hover { transform: translateY(-2px); }
 .cols span { display: block; font-size: 15px; color: var(--ink-2); margin-top: 2px; }
 .foot { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 22px clamp(18px, 4vw, 48px); border-top: 1px solid var(--line); font-size: 14px; color: var(--ink-2); }
 
+/* 첫 화면 보강: 상태, 바로가기, 숫자 */
+.top nav a.cta { color: var(--ink); font-weight: 700; border-bottom: 2px solid var(--ink); }
+.status { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--ink-2); margin-bottom: clamp(18px, 3vh, 28px); padding: 5px 14px 5px 12px; border: 1px solid var(--line); border-radius: 999px; background: #fff8; }
+.status .dot { width: 8px; height: 8px; border-radius: 50%; background: #1fae63; box-shadow: 0 0 0 4px #1fae6326; }
+.hook { margin-top: 18px; opacity: 0; animation: fade 0.8s 0.8s forwards; }
+.hook a { display: inline-block; font-weight: 700; text-decoration: none; padding: 10px 18px; border-radius: 12px; background: var(--ink); color: #fff; transition: transform 0.2s; }
+.hook a:hover { transform: translateY(-2px); }
+.stats { margin-top: clamp(32px, 6vh, 56px); display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; opacity: 0; animation: fade 0.8s 0.9s forwards; }
+.stats > div { padding: 4px 18px 4px 0; }
+.stats > div + div { padding-left: 18px; border-left: 1px solid var(--line); }
+.stats dt { font-family: var(--display); font-weight: 800; font-size: clamp(26px, 3vw, 40px); letter-spacing: -0.03em; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.stats dt small { font-size: 0.5em; color: var(--ink-2); font-weight: 600; }
+.stats dd { font-size: 14px; color: var(--ink-2); margin-top: 4px; }
+.index { margin-top: clamp(28px, 5vh, 48px); }
+
+/* 일하는 방식 */
+.how, .more, .contact { max-width: 1320px; margin: 0 auto; padding: clamp(48px, 9vh, 110px) clamp(18px, 4vw, 48px); }
+.how h2, .more h2, .contact h2 { font-family: var(--display); font-weight: 800; font-size: clamp(30px, 4vw, 52px); letter-spacing: -0.03em; line-height: 1.2; }
+.how-head { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 4vw, 64px); align-items: end; margin-bottom: clamp(24px, 4vh, 44px); }
+.how-head p { color: var(--ink-2); max-width: 46ch; }
+.rules { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; counter-reset: rule; }
+.rules li { background: #fff; border-radius: 20px; padding: 22px 22px 24px; display: flex; flex-direction: column; gap: 10px; counter-increment: rule; }
+.rules li::before { content: '0' counter(rule); font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 13px; font-weight: 700; color: var(--ink-2); }
+.rules h3 { font-size: 18px; line-height: 1.4; letter-spacing: -0.01em; }
+.rules p { font-size: 15px; color: var(--ink-2); flex: 1; }
+.rules a { font-size: 14px; font-weight: 600; text-underline-offset: 4px; }
+.base { margin-top: 18px; padding: 18px 22px; border-radius: 16px; border: 1px dashed #b9bfcc; font-size: 15.5px; color: var(--ink-2); }
+.base b { color: var(--ink); margin-right: 4px; }
+
+/* 카드 안의 문제 해결 줄 */
+.wins { display: grid; gap: 8px; }
+.wins li { font-size: 14.5px; line-height: 1.6; padding-left: 12px; border-left: 2px solid var(--card-accent); }
+.wins b { color: var(--card-accent); margin-right: 6px; }
+
+/* 그 밖의 프로젝트 */
+.more h2 { margin-bottom: clamp(20px, 4vh, 40px); }
+.grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.grid article { background: #fff; border-radius: 20px; padding: clamp(20px, 2.4vw, 30px); display: flex; flex-direction: column; gap: 10px; }
+.grid .meta { font-size: 13px; font-weight: 600; color: var(--ink-2); }
+.grid h3 { font-size: clamp(19px, 1.7vw, 23px); line-height: 1.35; letter-spacing: -0.02em; }
+.grid p { font-size: 15px; color: var(--ink-2); }
+.grid .tags li { --card-line: var(--line); --card-muted: var(--ink-2); }
+.grid article > a { font-size: 14px; font-weight: 600; text-underline-offset: 4px; margin-top: auto; }
+
+/* 이력 보강 */
+.cols span a { color: var(--ink); font-weight: 600; text-underline-offset: 3px; }
+.edu, .skills { margin-top: clamp(36px, 6vh, 64px); }
+.edu h3, .skills h3 { font-size: 15px; font-weight: 600; color: var(--ink-2); padding-bottom: 10px; border-bottom: 1px solid var(--ink); }
+.edu li { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.edu b { display: block; font-weight: 700; }
+.edu span { display: block; font-size: 15px; color: var(--ink-2); margin-top: 2px; }
+.aplus { display: flex !important; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 10px !important; }
+.aplus i { font-style: normal; font-size: 13px; padding: 2px 10px; border-radius: 999px; background: #fff; border: 1px solid var(--line); color: var(--ink); }
+.path { margin-top: 16px; font-size: 15px; color: var(--ink-2); max-width: 80ch; }
+.path b { color: var(--ink); margin-right: 6px; }
+.skills dl > div { display: grid; grid-template-columns: 8em 1fr; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+.skills dt { font-weight: 700; }
+.skills dd { color: var(--ink-2); }
+
+/* 연락 */
+.contact { padding-bottom: clamp(64px, 12vh, 140px); }
+.contact > p { color: var(--ink-2); margin-top: 14px; max-width: 52ch; }
+.contact .links { margin-top: 24px; font-size: 16px; }
+.contact a.go { font-size: 17px; padding: 13px 24px; }
+
+@media (min-width: 901px) and (max-height: 940px) {
+  .card h2 { font-size: clamp(30px, 3.6vw, 52px); }
+  .sum { font-size: 15.5px; }
+  .facts > div { padding: 5px 0; font-size: 14px; }
+  .wins li { font-size: 14px; line-height: 1.55; }
+  .role { font-size: 14px; }
+}
+@media (min-width: 901px) and (max-height: 860px) {
+  .card { grid-template-columns: minmax(0, 0.95fr) minmax(400px, 1.05fr); }
+  .card .tags { display: none; }
+  .card h2 { font-size: clamp(28px, 3.2vw, 44px); }
+}
+@media (max-width: 1100px) {
+  .rules { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 900px) {
+  .stats { grid-template-columns: 1fr 1fr; row-gap: 18px; }
+  .stats > div:nth-child(3) { padding-left: 0; border-left: 0; }
+  .how-head, .grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 680px) {
+  .top nav a:not(.cta):not([href="/resume/"]) { display: none; }
+  .rules { grid-template-columns: 1fr; }
+  .skills dl > div { grid-template-columns: 1fr; gap: 2px; }
+}
+
 /* 좁은 화면: 고정하지 않고 위에서 아래로 */
-@media (max-width: 900px), (max-height: 600px) {
+@media (max-width: 900px), (max-height: 699px) {
   .index { grid-template-columns: 1fr 1fr; }
   .pin { height: auto; margin-bottom: 18px; }
   .card { position: relative; top: 0; height: auto; grid-template-columns: 1fr; border-radius: 22px; }
@@ -97,11 +188,10 @@ a.go:hover { transform: translateY(-2px); }
   .cols { grid-template-columns: 1fr; }
 }
 @media (max-width: 520px) {
-  .top nav a:nth-child(2) { display: none; }
   .index { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .hero .line > span, .lede, .index { animation: none; transform: none; opacity: 1; }
+  .hero .line > span, .lede, .index, .hook, .stats { animation: none; transform: none; opacity: 1; }
   a.go { transition: none; }
 }
