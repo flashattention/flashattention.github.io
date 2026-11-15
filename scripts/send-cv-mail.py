@@ -36,7 +36,7 @@ lines = [
     f"- 서울 러너 건물 약 {s.get('seoul.buildings')} 채 · 가게 약 {s.get('seoul.shops')} 곳",
     f"- AgentLab {s.get('agentlab.lessons')}개 강의 · Latent Atlas 개념 {s.get('atlas.concepts')}개",
     "",
-    "첨부: 검정 배경(화면용), 흰 배경(인쇄용)",
+    "첨부: 이력서 PDF (A4, 흰 배경)",
     "사이트: https://flashattention.github.io/",
 ]
 
