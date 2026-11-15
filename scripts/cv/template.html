@@ -36,7 +36,7 @@ ul, ol { list-style: none; }
 /* 첫 화면 */
 .status { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; font-size: 7.6pt; font-weight: 600; color: var(--ink-2); padding: 2px 9px 2px 8px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); }
 .status i { width: 5px; height: 5px; border-radius: 50%; background: #34d399; box-shadow: 0 0 0 3px #34d39926; }
-h1 { font-family: var(--display); font-weight: 800; font-size: 25pt; line-height: 1.14; letter-spacing: -0.035em; }
+h1 { font-family: var(--display); font-weight: 800; font-size: 21pt; line-height: 1.18; letter-spacing: -0.035em; }
 .lede { font-size: 9.2pt; color: var(--ink-2); max-width: 150mm; margin-top: -1mm; }
 /* 위 선과 '+'는 배경으로 그린다 (글자로 넣으면 PDF 글자 추출에 '+'가 섞이고 읽는 순서가 뒤로 밀린다) */
 .pillars { display: grid; grid-template-columns: 0.94fr 1fr 1.18fr; padding-top: 7px; background: linear-gradient(var(--ink),var(--ink)) calc(30.128% + -2.58px) 5.7px / 13px 2.6px no-repeat, linear-gradient(var(--ink),var(--ink)) calc(30.128% + -0.52px) 0.5px / 2.6px 13px no-repeat, linear-gradient(var(--ink),var(--ink)) calc(62.179% + 1.58px) 5.7px / 13px 2.6px no-repeat, linear-gradient(var(--ink),var(--ink)) calc(62.179% + 0.32px) 0.5px / 2.6px 13px no-repeat, linear-gradient(var(--bg),var(--bg)) calc(30.128% + -3.78px) 0 / 19px 14px no-repeat, linear-gradient(var(--bg),var(--bg)) calc(62.179% + 2.31px) 0 / 19px 14px no-repeat, linear-gradient(var(--ink),var(--ink)) 0 6.25px / 100% 1.5px no-repeat; }
@@ -53,6 +53,12 @@ body span[data-stat] { display: inline; margin: 0; font: inherit; color: inherit
 .stats dt { font-family: var(--display); font-weight: 800; font-size: 17pt; letter-spacing: -0.03em; line-height: 1.15; font-variant-numeric: tabular-nums; }
 .stats dt small { font-size: 0.5em; color: var(--ink-2); font-weight: 600; }
 .stats dd { font-size: 7.3pt; color: var(--ink-2); margin-top: 0.6mm; line-height: 1.4; }
+/* 기본 정보 띠: 서류 첫 확인 항목(학력·연구·교육·어학·병역)을 1쪽에 */
+.basics { display: grid; grid-template-columns: 1.35fr 1fr 1fr 1fr 0.7fr; border: 1px solid var(--line); border-radius: 9px; background: var(--surface); padding: 2mm 0; }
+.basics > div { padding: 0 3.2mm; }
+.basics > div + div { border-left: 1px solid var(--line); }
+.basics dt { font-size: 6.8pt; font-weight: 700; color: var(--ink-3); }
+.basics dd { font-size: 7.6pt; font-weight: 600; line-height: 1.45; margin-top: 0.3mm; }
 .hook { align-self: flex-start; font-weight: 700; font-size: 8.4pt; padding: 1.8mm 3.6mm; border-radius: 8px; background: var(--ink); color: var(--on-ink); }
 
 /* 섹션 제목 */
@@ -137,7 +143,7 @@ h2 small { font-family: var(--body); font-size: 7.6pt; font-weight: 500; color: 
   </header>
 
   <p class="status"><i></i>신입 · 2026.02 학사 졸업 · 2026.12.21부터 입사 가능</p>
-  <h1>기획하고,<br>AI 에이전트와 만들고,<br>사람들에게 써 보게 합니다.</h1>
+  <h1>기획하고, AI 에이전트와 만들고,<br>사람들에게 써 보게 합니다.</h1>
   <p class="lede">신입 엔지니어 전은배입니다. 무엇을 만들지와 통과 기준은 데이터로 정하고, 구현은 AI 코딩 에이전트와 함께 하며, 테스트·봇 시뮬레이션·사용자 지표로 확인한 것만 내보냅니다.</p>
 
   <ul class="pillars">
@@ -147,10 +153,18 @@ h2 small { font-family: var(--body); font-size: 7.6pt; font-weight: 500; color: 
   </ul>
 
   <dl class="stats">
-    <div><dt><span data-stat="jelly.days">41</span>일</dt><dd>AI 에이전트와 웹게임 <span data-stat="jelly.games">21</span>종을 혼자 출시·운영</dd></div>
+    <div><dt><span data-stat="jelly.days">41</span>일</dt><dd>에이전트와 웹게임 <span data-stat="jelly.games">21</span>종을 혼자 출시·운영</dd></div>
     <div><dt><span data-stat="jelly.agent">621</span><small> / <span data-stat="jelly.commits">660</span></small></dt><dd>에이전트와 공동 작성한 커밋 (<span data-stat="jelly.asof">2026.11.15</span> 기준)</dd></div>
     <div><dt><span data-stat="jelly.plays">3,864</span>판</dt><dd>드림 러너 실사용자 플레이 (<span data-stat="jelly.mdate">2026.11.15</span> 기준)</dd></div>
-    <div><dt><span data-stat="jelly.lbPct">59%</span></dt><dd>순위표 사용자 중 로그인 없이 기록을 남긴 비율</dd></div>
+    <div><dt><span data-stat="jelly.lines">68,000</span>줄</dt><dd>혼자 운영하는 젤리 게임즈의 JavaScript 코드 규모</dd></div>
+  </dl>
+
+  <dl class="basics">
+    <div><dt>학력</dt><dd>전북대 소프트웨어공학 학사<br>2026.02 졸업 · 전공평점 4.0/4.5</dd></div>
+    <div><dt>연구</dt><dd>Scientific Reports<br>SCIE Q1 · 제2저자</dd></div>
+    <div><dt>교육</dt><dd>SK AX SKALA 862시간<br>2026.12 수료 예정</dd></div>
+    <div><dt>어학</dt><dd>OPIc 영어 AL<br>호주·캐나다 3년 이상 거주</dd></div>
+    <div><dt>병역</dt><dd>공군 병장<br>만기전역</dd></div>
   </dl>
 
   <a class="hook" href="https://jelly-city.fly.dev">설치·가입 없이 지금 바로 플레이되는 웹게임 <span data-stat="jelly.games">21</span>종 → jelly-city.fly.dev</a>
@@ -183,6 +197,16 @@ h2 small { font-family: var(--body); font-size: 7.6pt; font-weight: 500; color: 
 </section>
 
 <section class="page loose">
+  <div class="grp">
+  <h2>AI 에이전트와 일하는 방식 <small>구현은 에이전트가, 문제 정의와 통과 기준과 검수는 제가 맡습니다.</small></h2>
+  <ol class="rules">
+    <li><h4>지시서로 쪼개고, 하나씩 검수합니다</h4><p>에이전트가 일부만 하고 끝났다고 보고하는 문제를 "지시 → 작업 지시서 → 하나씩 수행 → 스크린샷 검수 → 커밋" 규칙(CLAUDE.md)으로 해결했습니다.</p></li>
+    <li><h4>통과 기준은 숫자로 정합니다</h4><p>봇 시뮬레이션으로 점령전 공격팀 승률을 76~84%에서 50~57%로 맞췄고, 신규 맵 30종은 자동 플레이 봇이 3개 난이도를 완주한 것만 내보냈습니다.</p></li>
+    <li><h4>결정과 이유를 남기고, 틀리면 되돌립니다</h4><p>모바일 의견으로 바꾼 조작을, 기록 경쟁 게임은 기기마다 규칙이 달라선 안 된다는 원칙을 세워 되돌리고 의사결정 기록에 남겼습니다.</p></li>
+    <li><h4>외부 데이터로 만든 결과는 화면으로 확인합니다</h4><p>북촌 한옥마을이 붉은 벽돌 동네로 그려진 것을 화면 검수에서 찾아, 건축물대장 구조 코드 범위 오류를 고쳤습니다.</p></li>
+  </ol>
+  <p class="base"><b>에이전트 이전에는 직접 구현했습니다.</b>논문 실험 코드(BERT 11종 파인튜닝과 앙상블), 캡스톤 SPEIS의 예측 모델·챗봇·React 화면, 해커톤의 React/Node.js 풀스택과 AWS EC2 배포·CI/CD. 그래서 에이전트가 쓴 코드의 구조를 읽고 판단할 수 있습니다.</p>
+  </div>
   <div class="grp">
   <h2>대표 프로젝트 <small>계속</small></h2>
   <article class="card card-agentlab">
@@ -230,17 +254,6 @@ h2 small { font-family: var(--body); font-size: 7.6pt; font-weight: 500; color: 
     </article>
   </div>
   </div>
-  <div class="grp">
-  <h2>AI 에이전트와 일하는 방식 <small>구현은 에이전트가, 문제 정의와 통과 기준과 검수는 제가 맡습니다.</small></h2>
-  <ol class="rules">
-    <li><h4>지시서로 쪼개고, 하나씩 검수합니다</h4><p>에이전트가 일부만 하고 끝났다고 보고하는 문제를 "지시 → 작업 지시서 → 하나씩 수행 → 스크린샷 검수 → 커밋" 규칙(CLAUDE.md)으로 해결했습니다.</p></li>
-    <li><h4>통과 기준은 숫자로 정합니다</h4><p>봇 시뮬레이션으로 점령전 공격팀 승률을 76~84%에서 50~57%로 맞췄고, 신규 맵 30종은 자동 플레이 봇이 3개 난이도를 완주한 것만 내보냈습니다.</p></li>
-    <li><h4>결정과 이유를 남기고, 틀리면 되돌립니다</h4><p>모바일 의견으로 바꾼 조작을, 기록 경쟁 게임은 기기마다 규칙이 달라선 안 된다는 원칙을 세워 되돌리고 의사결정 기록에 남겼습니다.</p></li>
-    <li><h4>외부 데이터로 만든 결과는 화면으로 확인합니다</h4><p>북촌 한옥마을이 붉은 벽돌 동네로 그려진 것을 화면 검수에서 찾아, 건축물대장 구조 코드 범위 오류를 고쳤습니다.</p></li>
-  </ol>
-  <p class="base"><b>에이전트 이전에는 직접 구현했습니다.</b>논문 실험 코드(BERT 11종 파인튜닝과 앙상블), 캡스톤 SPEIS의 예측 모델·챗봇·React 화면, 해커톤의 React/Node.js 풀스택과 AWS EC2 배포·CI/CD. 그래서 에이전트가 쓴 코드의 구조를 읽고 판단할 수 있습니다.</p>
-
-  </div>
   <footer class="foot"><span>전은배 · AI Native SW Engineer</span><span>2 / 3</span></footer>
 </section>
 
@@ -248,8 +261,8 @@ h2 small { font-family: var(--body); font-size: 7.6pt; font-weight: 500; color: 
   <div class="grp">
   <h2>그 밖의 프로젝트</h2>
   <div class="more">
-    <article><p class="meta">SK AX SKALA · 6인 팀 리더·PM</p><h4>이벤트 인지형 서울 교통 예측·드리프트 대응</h4><p>75일 재현 실험에서 "감지 즉시 재학습"(RMSE 1.732, 11회)이 14일 주기(1.669, 5회)보다 나빠, "감지는 경보만, 교체는 배포 게이트를 통과한 모델만"으로 운영 정책을 바꿨습니다. 경기·집회 일정을 피처로 넣어 이벤트 시간대 오차를 약 32% 줄였습니다(2.80 → 1.89km/h).</p></article>
     <article><p class="meta">SK AX SKALA · 6인 팀</p><h4>KV Cache 기술 비교 평가 Multi-Agent RAG</h4><p>근거 없는 주장이 보고서에 섞이는 문제를, 검증 Agent가 실패한 주장을 만든 Agent만 다시 실행하는 표적 재시도 루프로 풀었습니다. 병렬 Agent의 세그폴트를 전역 락으로 해결. 팀 평가 Hit Rate@3 0.867.</p></article>
+    <article><p class="meta">SK AX SKALA · 6인 팀 리더·PM</p><h4>이벤트 인지형 서울 교통 예측·드리프트 대응</h4><p>75일 재현 실험에서 "감지 즉시 재학습"(RMSE 1.732, 11회)이 14일 주기(1.669, 5회)보다 나빠, "감지는 경보만, 교체는 배포 게이트를 통과한 모델만"으로 운영 정책을 바꿨습니다. 경기·집회 일정을 피처로 넣어 이벤트 시간대 오차를 약 32% 줄였습니다(2.80 → 1.89km/h).</p></article>
     <article><p class="meta">캡스톤 · 4인 팀 · 직접 구현 · 학회 우수상</p><h4>스토리포인트 예측 애자일 협업 플랫폼 (SPEIS)</h4><p>TF-IDF·SBERT 특성에 XGBoost·LightGBM·CatBoost 앙상블로 선행 연구 대비 MAE 약 13% 감소. Hugging Face Spaces에 배포해 Spring Boot와 연동하고, LangChain 챗봇과 React 화면을 구현했습니다.</p></article>
     <article><p class="meta">해커톤 · 6인 팀 PM 겸 풀스택 · 직접 구현</p><h4>지역 인재·지방 이전 기업 매칭 플랫폼 (오작교)</h4><p>기업·지원자·이력서 엔티티 관계를 설계하고 CRUD API와 화면을 구현했습니다. AWS EC2에 배포하고 GitHub Actions로 CI/CD를 구축했습니다.</p></article>
   </div>
