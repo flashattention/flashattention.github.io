@@ -102,6 +102,9 @@ a.go:hover { transform: translateY(-2px); }
 /* 매일 아침 갱신되는 숫자(scripts/update-stats.mjs): 감싼 span이 위의 span 규칙에 걸리지 않게 */
 body span[data-stat] { display: inline; margin: 0; font: inherit; color: inherit; }
 .top nav a.cta { color: var(--ink); font-weight: 700; border-bottom: 2px solid var(--ink); }
+.top nav { align-items: center; }
+.top nav a.gh { display: inline-flex; padding: 4px; margin: -4px -4px -4px 0; color: var(--ink-2); }
+.top nav a.gh:hover { color: var(--ink); }
 .status { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; color: var(--ink-2); margin-bottom: clamp(18px, 3vh, 28px); padding: 5px 14px 5px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); }
 .status .dot { width: 8px; height: 8px; border-radius: 50%; background: #34d399; box-shadow: 0 0 0 4px #34d39926; }
 .hook { margin-top: 18px; opacity: 0; animation: fade 0.8s 0.8s forwards; }
@@ -197,7 +200,7 @@ body span[data-stat] { display: inline; margin: 0; font: inherit; color: inherit
   .how-head, .grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 680px) {
-  .top nav a:not(.cta):not([href="/resume/"]) { display: none; }
+  .top nav a:not(.cta):not(.gh):not([href="/resume/"]) { display: none; }
   .rules { grid-template-columns: 1fr; }
   .skills dl > div { grid-template-columns: 1fr; gap: 2px; }
 }
