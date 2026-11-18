@@ -1,6 +1,5 @@
 # 매일 아침 프로젝트 저장소(jelly-city, agent-lab, latent-atlas)에서 사이트 수치를 다시 계산하고,
 # 바뀐 값이 있을 때만 커밋한다. 푸시하면 GitHub Pages가 다시 배포한다.
-# 이어서 같은 수치로 이력서 PDF를 만들어 메일로 보낸다. PDF는 저장소에 남기지 않는다.
 name: 사이트 수치 갱신
 
 on:
@@ -25,8 +24,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
-          cache-dependency-path: scripts/package-lock.json
 
       - name: 프로젝트 저장소 받기
         run: |
@@ -47,20 +44,3 @@ jobs:
           git commit -am "사이트 수치 자동 갱신 ($(TZ=Asia/Seoul date '+%Y-%m-%d %H:%M'))"
           git push
 
-      # ---------- 이력서 PDF ----------
-      - name: 이력서 PDF 만들기
-        run: |
-          npm ci --prefix scripts --no-audit --no-fund
-          CHROME_PATH="$(command -v google-chrome)" node scripts/build-cv.mjs "$RUNNER_TEMP/cv"
-
-      - name: 이력서 메일 보내기
-        env:
-          MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
-          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
-          MAIL_TO: ${{ secrets.MAIL_TO }}
-        run: |
-          if [ -z "$MAIL_USERNAME" ] || [ -z "$MAIL_PASSWORD" ]; then
-            echo "::warning::MAIL_USERNAME / MAIL_PASSWORD Secret이 없어 메일을 건너뜁니다."
-            exit 0
-          fi
-          python3 scripts/send-cv-mail.py "$RUNNER_TEMP/cv"

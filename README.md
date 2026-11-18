@@ -74,14 +74,13 @@ HTML에서는 `<span data-stat="키">값</span>`의 내용과, `data-tpl="…{�
 
 저장소에서 셀 수 없는 숫자(데이터 9종·실시간 API 4종, 지표를 보고 결정한 당시의 숫자 71%·8% 같은 과거 기록, 논문·학점 등)는 손으로 고칩니다. 스케줄 실행은 GitHub 사정에 따라 몇 분에서 수십 분 늦을 수 있고, Actions 탭에서 **사이트 수치 갱신 → Run workflow**로 바로 돌릴 수 있습니다.
 
-## 이력서 PDF 메일 (매일 아침)
+## 이력서 PDF (직접 만들기)
 
-같은 워크플로가 수치를 갱신한 뒤 `scripts/build-cv.mjs`로 `scripts/cv/template.html`에 `stats.json` 값을 넣어 이력서 PDF를 만들고, `scripts/send-cv-mail.py`로 메일에 첨부해 보냅니다. PDF는 러너 임시 폴더에서만 만들고 저장소에는 올리지 않습니다(`.gitignore`에 `*.pdf`).
+`scripts/build-cv.mjs`가 `scripts/cv/template.html`에 `assets/portfolio/stats.json` 값을 넣어 이력서 PDF를 만듭니다. PDF는 저장소에 올리지 않습니다(`.gitignore`에 `*.pdf`).
 
-- 템플릿의 숫자도 사이트와 같은 `<span data-stat="키">` 형식입니다. 문구를 고칠 때는 템플릿만 고치면 됩니다.
+- 템플릿의 숫자도 사이트와 같은 `<span data-stat="키">` 형식이라, 매일 갱신되는 수치가 그대로 들어갑니다. 문구를 고칠 때는 템플릿만 고치면 됩니다.
 - 내용은 위에서 아래로 흐르고 쪽은 Chrome이 나눕니다. 평소 A4 2쪽이고, 2쪽을 넘으면 경고, 3쪽을 넘거나 웹 글꼴을 못 불러오면 실패합니다.
-- 메일은 저장소 **Settings → Secrets and variables → Actions**의 `MAIL_USERNAME`(보내는 Gmail), `MAIL_PASSWORD`(Gmail 앱 비밀번호), `MAIL_TO`(받는 주소, 비우면 보내는 주소)로 보냅니다. Secret이 없으면 메일 단계만 건너뜁니다.
-- 로컬에서 만들어 보기: `npm ci --prefix scripts && CHROME_PATH=<chrome 경로> node scripts/build-cv.mjs <출력 폴더>`
+- 만들기: `git pull && npm ci --prefix scripts && CHROME_PATH=<chrome 경로> node scripts/build-cv.mjs <출력 폴더>`
 
 ## 라이선스
 
