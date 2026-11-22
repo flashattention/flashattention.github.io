@@ -234,7 +234,7 @@ body span[data-stat] { display: inline; margin: 0; font: inherit; color: inherit
   .how-head, .grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 680px) {
-  .top nav a:not(.cta):not(.gh):not([href="/resume/"]) { display: none; }
+  .top nav a:not(.cta):not(.gh) { display: none; }
   .rules { grid-template-columns: 1fr; }
   .skills dl > div { grid-template-columns: 1fr; gap: 2px; }
 }
