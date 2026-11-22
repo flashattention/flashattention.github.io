@@ -2,13 +2,12 @@
 
 전은배의 포트폴리오 사이트입니다. **https://flashattention.github.io/**
 
-AI 코딩 에이전트와 함께 만든 프로젝트, 일하는 방식, 연구와 이력을 한 페이지에 모았고, 인쇄용 이력서 페이지를 따로 둡니다.
+AI 코딩 에이전트와 함께 만든 프로젝트, 일하는 방식, 연구와 이력을 한 페이지에 모았습니다.
 
 | 주소 | 내용 |
 |---|---|
 | [`/`](https://flashattention.github.io/) | 포트폴리오. 대표 프로젝트 4개(젤리 게임즈, AgentLab, 젤리 서울 러너, Latent Atlas)와 사이드 게임 카드, AI 에이전트와 일하는 방식, 그 밖의 프로젝트, 이력, 연락처 |
 | [`/games/`](https://flashattention.github.io/games/) | 사이드 게임 3편(카피좀비, 쥐구멍에도 볕 들 날, NEXUS-77). 첫 화면의 사이드 게임 카드에서 넘어옴 |
-| [`/resume/`](https://flashattention.github.io/resume/) | A4 2쪽 이력서. 브라우저의 인쇄 버튼으로 PDF 저장 |
 | `/about/` | 포트폴리오의 이력 섹션(`/#about`)으로 이동 |
 | `/categories/…`, 각 글 주소 | 예전에 쓴 머신러닝·NLP 학습 글 (`_posts/`) |
 
@@ -22,13 +21,12 @@ assets/portfolio/
   og.png                 링크 미리보기 이미지 (1200×630)
   games/*.webp           사이드 게임 화면 (각 배포 주소에서 찍은 1200×750)
 games/index.html         사이드 게임 페이지 (레이아웃 없이 그대로 배포)
-resume/index.html        인쇄용 이력서 (레이아웃 없이 그대로 배포)
 _pages/about.md          /about/ → /#about 이동
 _posts/, _pages/categories/   예전 학습 글과 카테고리 페이지 (Minimal Mistakes 레이아웃)
 _config.yml, _data/navigation.yml   학습 글 쪽 사이트 설정과 메뉴
 ```
 
-포트폴리오와 이력서는 외부 프레임워크 없이 HTML·CSS·JavaScript 파일 하나씩으로 되어 있습니다. 폰트는 Google Fonts(Hahmlet, Jua, JetBrains Mono)와 jsDelivr(Pretendard)에서 불러옵니다.
+포트폴리오는 외부 프레임워크 없이 HTML·CSS·JavaScript 파일 하나씩으로 되어 있습니다. 폰트는 Google Fonts(Hahmlet, Jua, JetBrains Mono)와 jsDelivr(Pretendard)에서 불러옵니다.
 
 ### 프로젝트 카드 동작
 
@@ -39,11 +37,11 @@ _config.yml, _data/navigation.yml   학습 글 쪽 사이트 설정과 메뉴
 
 ## 로컬에서 보기
 
-포트폴리오와 이력서만 볼 때는 정적 서버면 됩니다.
+포트폴리오만 볼 때는 정적 서버면 됩니다.
 
 ```bash
 python3 -m http.server 8000
-# http://localhost:8000/ , http://localhost:8000/resume/
+# http://localhost:8000/ , http://localhost:8000/games/
 ```
 
 학습 글까지 Jekyll로 빌드해 보려면 Ruby와 Bundler가 필요합니다.
@@ -59,7 +57,7 @@ bundle exec jekyll serve
 
 ## 수치 기준 (매일 아침 자동 갱신)
 
-첫 화면과 카드, 이력서의 숫자 중 저장소에서 다시 셀 수 있는 것은 `.github/workflows/stats.yml`이 매일 아침 8시(한국 시간)에 `scripts/update-stats.mjs`로 다시 계산합니다. 값이 바뀌었을 때만 `github-actions[bot]`이 커밋하고, 그 푸시로 GitHub Pages가 다시 배포됩니다. 계산한 값은 [`assets/portfolio/stats.json`](assets/portfolio/stats.json)에도 남깁니다.
+첫 화면과 카드의 숫자 중 저장소에서 다시 셀 수 있는 것은 `.github/workflows/stats.yml`이 매일 아침 8시(한국 시간)에 `scripts/update-stats.mjs`로 다시 계산합니다. 값이 바뀌었을 때만 `github-actions[bot]`이 커밋하고, 그 푸시로 GitHub Pages가 다시 배포됩니다. 계산한 값은 [`assets/portfolio/stats.json`](assets/portfolio/stats.json)에도 남깁니다.
 
 HTML에서는 `<span data-stat="키">값</span>`의 내용과, `data-tpl="…{키}…"`가 붙은 `<meta>`의 `content`만 바뀝니다. 새 숫자를 자동으로 바꾸려면 같은 형식으로 감싸고 스크립트에 키를 추가합니다.
 
@@ -87,4 +85,4 @@ HTML에서는 `<span data-stat="키">값</span>`의 내용과, `data-tpl="…{�
 
 ## 라이선스
 
-학습 글 쪽 레이아웃과 스타일(`_layouts/`, `_includes/`, `_sass/`)은 [Minimal Mistakes](https://github.com/mmistakes/minimal-mistakes) 테마(MIT, © Michael Rose and contributors)에서 왔으며 [LICENSE](LICENSE)를 따릅니다. 포트폴리오와 이력서의 글과 디자인은 전은배에게 있습니다.
+학습 글 쪽 레이아웃과 스타일(`_layouts/`, `_includes/`, `_sass/`)은 [Minimal Mistakes](https://github.com/mmistakes/minimal-mistakes) 테마(MIT, © Michael Rose and contributors)에서 왔으며 [LICENSE](LICENSE)를 따릅니다. 포트폴리오의 글과 디자인은 전은배에게 있습니다.

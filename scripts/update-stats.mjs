@@ -1,4 +1,4 @@
-// 프로젝트 저장소에서 사이트 수치를 다시 계산해 index.html, resume/index.html, assets/portfolio/stats.json을 고친다.
+// 프로젝트 저장소에서 사이트 수치를 다시 계산해 index.html과 assets/portfolio/stats.json을 고친다.
 //   쓰는 법: node scripts/update-stats.mjs <jelly-city> <agent-lab> <latent-atlas>
 //   HTML의 <span data-stat="키">값</span> 내용과 data-tpl="…{키}…"가 붙은 태그의 content 속성을 바꾼다.
 //   어떤 값을 못 구하면 경고만 내고 그 키는 기존 값을 그대로 둔다.
@@ -85,7 +85,7 @@ put('atlas', () => {
 // ---------- 페이지에 반영 ----------
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 let changed = 0;
-for (const rel of ['index.html', 'resume/index.html']) {
+for (const rel of ['index.html']) {
   const file = path.join(ROOT, rel), before = fs.readFileSync(file, 'utf8');
   const missing = new Set();
   let html = before.replace(/(<span data-stat="([\w.]+)">)([^<]*)(<\/span>)/g, (m, open, key, old, close) => (key in stats ? open + esc(stats[key]) + close : (missing.add(key), m)));
