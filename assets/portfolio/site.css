@@ -105,7 +105,6 @@ a.go:hover { transform: translateY(-2px); }
 .g-nexus { --card-bg: #120a1f; --card-ink: #f4eefe; --card-muted: #a99cc0; --card-line: #2f2147; --card-accent: #ff4fd8; --card-on-accent: #16061a; }
 .g-nexus .wins li:nth-child(2n) { border-left-color: #00f0ff; }
 .g-nexus .wins li:nth-child(2n) b { color: #00f0ff; }
-.links .muted { color: var(--card-muted); font-size: 14px; }
 @media (max-width: 900px) {
   .gcard { grid-template-columns: 1fr; border-radius: 22px; }
 }

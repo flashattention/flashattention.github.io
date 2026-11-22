@@ -1,9 +1,0 @@
-{
-  "name": "site-scripts",
-  "private": true,
-  "description": "사이트 수치 갱신과 이력서 PDF 생성 (Jekyll 빌드에서는 제외)",
-  "type": "module",
-  "dependencies": {
-    "playwright-core": "1.56.1"
-  }
-}

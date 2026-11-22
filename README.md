@@ -65,7 +65,8 @@ HTML에서는 `<span data-stat="키">값</span>`의 내용과, `data-tpl="…{�
 |---|---|
 | `jelly.games` | jelly-city `public/index.html`의 게임 카드 수 (서울 산책은 드림 러너의 맵이라 제외) |
 | `jelly.days` | jelly-city 첫 커밋 날짜부터 마지막 커밋 날짜까지 일수 (양 끝 포함, 한국 시간) |
-| `jelly.commits`, `jelly.agent`, `jelly.asof` | jelly-city 전체 커밋 수, 그중 `Co-Authored-By: Claude` 트레일러가 있는 커밋 수, 마지막 커밋 날짜 |
+| `all.agent`, `all.repos`, `all.asof` | 사이트에 실린 개인 프로젝트 저장소(jelly-city, agent-lab, latent-atlas, capyzombie, mouse-father, nexus-77)에서 `Co-Authored-By: Claude` 트레일러가 있는 커밋 수의 합, 저장소 수, 가장 최근 커밋 날짜. 저장소를 추가하려면 워크플로의 저장소 목록에 넣습니다 |
+| `jelly.asof` | jelly-city 마지막 커밋 날짜 |
 | `jelly.lines` | jelly-city의 `.js`·`.mjs`·`.cjs` 줄 수, 천 단위 내림 |
 | `jelly.plays`, `jelly.hours`, `jelly.lb*`, `jelly.mdate` | jelly-city `docs/metrics.md` (운영 서버에서 `tools/metrics.mjs`로 뽑아 커밋할 때 바뀝니다) |
 | `seoul.gu`, `seoul.tiles` | `public/dream-runner/hangang/seoul.json`의 구 수, `seoul/index.json`의 칸 수 |
@@ -74,14 +75,6 @@ HTML에서는 `<span data-stat="키">값</span>`의 내용과, `data-tpl="…{�
 | `atlas.*` | latent-atlas `src/registry.js`의 장·개념 수(`z`로 시작하는 장은 부록), `content/terms`의 언어 수 |
 
 저장소에서 셀 수 없는 숫자(데이터 9종·실시간 API 4종, 지표를 보고 결정한 당시의 숫자 71%·8% 같은 과거 기록, 논문·학점 등)는 손으로 고칩니다. 스케줄 실행은 GitHub 사정에 따라 몇 분에서 수십 분 늦을 수 있고, Actions 탭에서 **사이트 수치 갱신 → Run workflow**로 바로 돌릴 수 있습니다.
-
-## 이력서 PDF (직접 만들기)
-
-`scripts/build-cv.mjs`가 `scripts/cv/template.html`에 `assets/portfolio/stats.json` 값을 넣어 이력서 PDF를 만듭니다. PDF는 저장소에 올리지 않습니다(`.gitignore`에 `*.pdf`).
-
-- 템플릿의 숫자도 사이트와 같은 `<span data-stat="키">` 형식이라, 매일 갱신되는 수치가 그대로 들어갑니다. 문구를 고칠 때는 템플릿만 고치면 됩니다.
-- 내용은 위에서 아래로 흐르고 쪽은 Chrome이 나눕니다. 평소 A4 2쪽이고, 2쪽을 넘으면 경고, 3쪽을 넘거나 웹 글꼴을 못 불러오면 실패합니다.
-- 만들기: `git pull && npm ci --prefix scripts && CHROME_PATH=<chrome 경로> node scripts/build-cv.mjs <출력 폴더>`
 
 ## 라이선스
 

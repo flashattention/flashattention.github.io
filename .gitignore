@@ -27,9 +27,3 @@ codekit-config.json
 .sass-cache
 _asset_bundler_cache
 _site
-
-# 이력서 PDF는 저장소에 두지 않는다 (scripts/build-cv.mjs 결과물)
-*.pdf
-cv-out/
-# scripts/의 npm ci에 필요
-!scripts/package-lock.json

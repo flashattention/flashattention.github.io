@@ -1,5 +1,6 @@
 // 프로젝트 저장소에서 사이트 수치를 다시 계산해 index.html과 assets/portfolio/stats.json을 고친다.
-//   쓰는 법: node scripts/update-stats.mjs <jelly-city> <agent-lab> <latent-atlas>
+//   쓰는 법: node scripts/update-stats.mjs <jelly-city> <agent-lab> <latent-atlas> [그 밖의 프로젝트 저장소 ...]
+//   그 밖의 저장소는 에이전트 공동 작성 커밋 합계(all.*)에만 쓴다.
 //   HTML의 <span data-stat="키">값</span> 내용과 data-tpl="…{키}…"가 붙은 태그의 content 속성을 바꾼다.
 //   어떤 값을 못 구하면 경고만 내고 그 키는 기존 값을 그대로 둔다.
 import fs from 'fs';
@@ -8,8 +9,8 @@ import { execFileSync } from 'child_process';
 import { fileURLToPath } from 'url';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
-const [JELLY, AGENT, ATLAS] = process.argv.slice(2).map((p) => path.resolve(p));
-if (!ATLAS) { console.error('usage: node scripts/update-stats.mjs <jelly-city> <agent-lab> <latent-atlas>'); process.exit(2); }
+const [JELLY, AGENT, ATLAS, ...EXTRA] = process.argv.slice(2).map((p) => path.resolve(p));
+if (!ATLAS) { console.error('usage: node scripts/update-stats.mjs <jelly-city> <agent-lab> <latent-atlas> [repo ...]'); process.exit(2); }
 
 const read = (...p) => fs.readFileSync(path.join(...p), 'utf8');
 const git = (dir, ...args) => execFileSync('git', ['-C', dir, ...args], { encoding: 'utf8', maxBuffer: 1 << 28, env: { ...process.env, TZ: 'Asia/Seoul' } });
@@ -17,6 +18,21 @@ const num = (n) => n.toLocaleString('en-US');
 const warn = (msg) => console.log(`::warning::${msg}`);
 const stats = {};
 const put = (group, fn) => { try { Object.assign(stats, Object.fromEntries(Object.entries(fn()).map(([k, v]) => [`${group}.${k}`, String(v)]))); } catch (e) { warn(`${group}: ${e.message}`); } };
+
+// ---------- 사이트에 실린 개인 프로젝트 전체: AI 에이전트와 공동 작성한 커밋 ----------
+put('all', () => {
+  const repos = [JELLY, AGENT, ATLAS, ...EXTRA];
+  let agent = 0, asof = '';
+  for (const dir of repos) {
+    const bodies = git(dir, 'log', '--format=%B%x00').split('\0').filter((b) => b.trim());
+    const n = bodies.filter((b) => /co-authored-by:[^\n]*claude/i.test(b)).length;
+    const last = git(dir, 'log', '-1', '--format=%ad', '--date=format-local:%Y-%m-%d').trim();
+    if (last > asof) asof = last;
+    agent += n;
+    console.log(`  ${path.basename(dir)}: 에이전트 공동 작성 커밋 ${n}`);
+  }
+  return { agent: num(agent), repos: repos.length, asof: asof.replaceAll('-', '.') };
+});
 
 // ---------- 젤리 게임즈 ----------
 put('jelly', () => {
@@ -26,11 +42,9 @@ put('jelly', () => {
   const dates = git(JELLY, 'log', '--format=%ad', '--date=format-local:%Y-%m-%d').trim().split('\n');
   const last = dates[0], first = dates[dates.length - 1];
   const days = Math.round((Date.parse(last) - Date.parse(first)) / 864e5) + 1;
-  const bodies = git(JELLY, 'log', '--format=%B%x00').split('\0').filter((b) => b.trim());
-  const agent = bodies.filter((b) => /co-authored-by:[^\n]*claude/i.test(b)).length;
   const files = git(JELLY, 'ls-files', '-z').split('\0').filter((f) => /\.(m|c)?js$/.test(f) && !f.includes('node_modules/'));
   let lines = 0; for (const f of files) { const s = fs.readFileSync(path.join(JELLY, f), 'utf8'); for (let i = 0; i < s.length; i++) if (s.charCodeAt(i) === 10) lines++; }
-  return { games: games.size, days, commits: num(bodies.length), agent: num(agent), asof: last.replaceAll('-', '.'), lines: num(Math.floor(lines / 1000) * 1000) };
+  return { games: games.size, days, asof: last.replaceAll('-', '.'), lines: num(Math.floor(lines / 1000) * 1000) };
 });
 put('jelly', () => { // 운영 지표 문서 (tools/metrics.mjs로 뽑아 커밋한 값)
   const md = read(JELLY, 'docs/metrics.md');
