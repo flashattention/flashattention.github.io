@@ -65,7 +65,7 @@ HTML에서는 `<span data-stat="키">값</span>`의 내용과, `data-tpl="…{�
 |---|---|
 | `jelly.games` | jelly-city `public/index.html`의 게임 카드 수 (서울 산책은 드림 러너의 맵이라 제외) |
 | `jelly.days` | jelly-city 첫 커밋 날짜부터 마지막 커밋 날짜까지 일수 (양 끝 포함, 한국 시간) |
-| `all.agent`, `all.repos`, `all.asof` | 사이트에 실린 개인 프로젝트 저장소(jelly-city, agent-lab, latent-atlas, capyzombie, mouse-father, nexus-77)에서 `Co-Authored-By: Claude` 트레일러가 있는 커밋 수의 합, 저장소 수, 가장 최근 커밋 날짜. 저장소를 추가하려면 워크플로의 저장소 목록에 넣습니다 |
+| `all.agent`, `all.repos`, `all.asof` | 사이트에 실린 개인 프로젝트 저장소(jelly-city, agent-lab, latent-atlas, capyzombie, mouse-father, nexus-77)에서 최근 30일(실행 시각 기준, 커밋 시각으로 판단) 동안 `Co-Authored-By: Claude` 트레일러가 있는 커밋 수의 합, 저장소 수, 계산한 날짜(한국 시간). 저장소를 추가하려면 워크플로의 저장소 목록에 넣습니다 |
 | `jelly.asof` | jelly-city 마지막 커밋 날짜 |
 | `jelly.lines` | jelly-city의 `.js`·`.mjs`·`.cjs` 줄 수, 천 단위 내림 |
 | `jelly.plays`, `jelly.hours`, `jelly.lb*`, `jelly.mdate` | jelly-city `docs/metrics.md` (운영 서버에서 `tools/metrics.mjs`로 뽑아 커밋할 때 바뀝니다) |

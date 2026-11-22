@@ -19,19 +19,20 @@ const warn = (msg) => console.log(`::warning::${msg}`);
 const stats = {};
 const put = (group, fn) => { try { Object.assign(stats, Object.fromEntries(Object.entries(fn()).map(([k, v]) => [`${group}.${k}`, String(v)]))); } catch (e) { warn(`${group}: ${e.message}`); } };
 
-// ---------- 사이트에 실린 개인 프로젝트 전체: AI 에이전트와 공동 작성한 커밋 ----------
+// ---------- 사이트에 실린 개인 프로젝트 전체: 최근 30일 동안 AI 에이전트와 공동 작성한 커밋 ----------
+// 기간은 실행 시각에서 30일 전까지(커밋 시각 기준). 매일 아침 실행하므로 기간도 하루씩 움직인다.
 put('all', () => {
   const repos = [JELLY, AGENT, ATLAS, ...EXTRA];
-  let agent = 0, asof = '';
+  const since = new Date(Date.now() - 30 * 864e5).toISOString();
+  let agent = 0;
   for (const dir of repos) {
-    const bodies = git(dir, 'log', '--format=%B%x00').split('\0').filter((b) => b.trim());
+    const bodies = git(dir, 'log', `--since=${since}`, '--format=%B%x00').split('\0').filter((b) => b.trim());
     const n = bodies.filter((b) => /co-authored-by:[^\n]*claude/i.test(b)).length;
-    const last = git(dir, 'log', '-1', '--format=%ad', '--date=format-local:%Y-%m-%d').trim();
-    if (last > asof) asof = last;
     agent += n;
-    console.log(`  ${path.basename(dir)}: 에이전트 공동 작성 커밋 ${n}`);
+    console.log(`  ${path.basename(dir)}: 최근 30일 에이전트 공동 작성 커밋 ${n}`);
   }
-  return { agent: num(agent), repos: repos.length, asof: asof.replaceAll('-', '.') };
+  const today = new Date(Date.now() + 9 * 36e5).toISOString().slice(0, 10).replaceAll('-', '.'); // 한국 날짜
+  return { agent: num(agent), repos: repos.length, asof: today };
 });
 
 // ---------- 젤리 게임즈 ----------
