@@ -6,7 +6,8 @@ AI 코딩 에이전트와 함께 만든 프로젝트, 일하는 방식, 연구�
 
 | 주소 | 내용 |
 |---|---|
-| [`/`](https://flashattention.github.io/) | 포트폴리오. 대표 프로젝트 4개(젤리 게임즈, AgentLab, 젤리 서울 러너, Latent Atlas), AI 에이전트와 일하는 방식, 그 밖의 프로젝트, 이력, 연락처 |
+| [`/`](https://flashattention.github.io/) | 포트폴리오. 대표 프로젝트 4개(젤리 게임즈, AgentLab, 젤리 서울 러너, Latent Atlas)와 사이드 게임 카드, AI 에이전트와 일하는 방식, 그 밖의 프로젝트, 이력, 연락처 |
+| [`/games/`](https://flashattention.github.io/games/) | 사이드 게임 3편(카피좀비, 쥐구멍에도 볕 들 날, NEXUS-77). 첫 화면의 사이드 게임 카드에서 넘어옴 |
 | [`/resume/`](https://flashattention.github.io/resume/) | A4 2쪽 이력서. 브라우저의 인쇄 버튼으로 PDF 저장 |
 | `/about/` | 포트폴리오의 이력 섹션(`/#about`)으로 이동 |
 | `/categories/…`, 각 글 주소 | 예전에 쓴 머신러닝·NLP 학습 글 (`_posts/`) |
@@ -19,6 +20,8 @@ assets/portfolio/
   site.css               포트폴리오 스타일
   site.js                프로젝트 카드의 캔버스 장면과 스크롤 연동
   og.png                 링크 미리보기 이미지 (1200×630)
+  games/*.webp           사이드 게임 화면 (각 배포 주소에서 찍은 1200×750)
+games/index.html         사이드 게임 페이지 (레이아웃 없이 그대로 배포)
 resume/index.html        인쇄용 이력서 (레이아웃 없이 그대로 배포)
 _pages/about.md          /about/ → /#about 이동
 _posts/, _pages/categories/   예전 학습 글과 카테고리 페이지 (Minimal Mistakes 레이아웃)

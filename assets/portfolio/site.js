@@ -265,8 +265,41 @@
     },
   };
 
+  // ---------- 사이드 게임: 세 게임의 실제 화면이 겹쳐 있다가 부채꼴로 펼쳐진다 ----------
+  const side = {
+    games: [['capy', '카피좀비'], ['mouse', '쥐구멍에도 볕 들 날'], ['nexus', 'NEXUS-77']].map(([id, name]) => {
+      const img = new Image(); img.decoding = 'async'; img.src = `/assets/portfolio/games/${id}.webp`;
+      return { img, name };
+    }),
+    draw(c, w, h, p, t) {
+      const fan = ease(0.04, 0.55, p), cw = Math.min(w * 0.43, h * 0.56 * 1.6), ch = cw / 1.6, fs = Math.max(12, Math.min(16, w / 48));
+      // 가운데 카드를 마지막에 그려 맨 위에 둔다
+      for (const i of [0, 2, 1]) {
+        const g = this.games[i], k = i - 1;
+        const x = w / 2 + k * cw * 0.6 * fan, y = h * 0.47 + Math.abs(k) * ch * 0.1 * fan + Math.sin(t * 0.9 + i * 2) * 3 * fan;
+        c.save(); c.translate(x, y); c.rotate(k * 0.1 * fan);
+        c.shadowColor = 'rgba(0,0,0,.55)'; c.shadowBlur = 40; c.shadowOffsetY = 18;
+        c.fillStyle = '#1e1813'; rr(c, -cw / 2, -ch / 2, cw, ch, 14); c.fill();
+        c.shadowColor = 'transparent';
+        c.save(); rr(c, -cw / 2, -ch / 2, cw, ch, 14); c.clip();
+        if (g.img.complete && g.img.naturalWidth) c.drawImage(g.img, -cw / 2, -ch / 2, cw, ch);
+        if (k) { c.fillStyle = `rgba(20,17,14,${0.25 * fan})`; c.fillRect(-cw / 2, -ch / 2, cw, ch); }
+        c.restore();
+        c.strokeStyle = 'rgba(255,255,255,.14)'; c.lineWidth = 1; rr(c, -cw / 2 + 0.5, -ch / 2 + 0.5, cw - 1, ch - 1, 14); c.stroke();
+        // 이름표
+        const a = ease(0.45, 0.75, p);
+        if (a > 0) {
+          c.globalAlpha = a; c.font = `700 ${fs}px ${FONT}`; c.textAlign = 'center'; c.textBaseline = 'top';
+          c.fillStyle = '#f3ece2'; c.fillText(g.name, 0, ch / 2 + 14);
+          c.globalAlpha = 1;
+        }
+        c.restore();
+      }
+    },
+  };
+
   // ---------- 엔진 ----------
-  const defs = { jelly, seoul, atlas, agentlab };
+  const defs = { jelly, seoul, atlas, agentlab, side };
   const scenes = [...document.querySelectorAll('.pin[data-scene]')].map((pin) => {
     const canvas = pin.querySelector('canvas');
     return { pin, canvas, ctx: canvas.getContext('2d'), def: defs[pin.dataset.scene], state: {}, w: 0, h: 0, p: 0, sp: reduce ? 0.86 : 0, visible: false, ptr: null };
@@ -321,6 +354,7 @@
   if (reduce) {
     // 움직임을 줄이는 설정에서는 완성된 한 장면만 보여 준다. 젤리는 자리를 잡을 때까지만 계산한다.
     requestAnimationFrame(() => scenes.forEach((sc) => { for (let i = 0; i < 240; i++) render(sc, 0); }));
+    addEventListener('load', () => scenes.forEach((sc) => render(sc, 0))); // 사이드 게임 화면 이미지가 늦게 오면 다시 그린다
     return;
   }
   const t0 = performance.now();

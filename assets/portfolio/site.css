@@ -37,7 +37,7 @@ ul, ol { list-style: none; }
 @keyframes rise { to { transform: none; } }
 .lede { max-width: 62ch; margin-top: clamp(22px, 4vh, 40px); font-size: clamp(17px, 1.5vw, 20px); color: var(--ink-2); opacity: 0; animation: fade 0.8s 0.7s forwards; }
 @keyframes fade { to { opacity: 1; } }
-.index { margin-top: clamp(36px, 7vh, 72px); display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--ink); opacity: 0; animation: fade 0.8s 0.9s forwards; }
+.index { margin-top: clamp(36px, 7vh, 72px); display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--ink); opacity: 0; animation: fade 0.8s 0.9s forwards; }
 .index a { display: block; padding: 16px 16px 18px 0; text-decoration: none; border-bottom: 1px solid var(--line); height: 100%; position: relative; }
 .index a::before { content: ''; position: absolute; left: 0; top: -1px; height: 3px; width: 0; background: var(--c); transition: width 0.35s; }
 .index a:hover::before, .index a:focus-visible::before { width: calc(100% - 16px); }
@@ -47,6 +47,7 @@ ul, ol { list-style: none; }
 .index [data-c='seoul'] { --c: #f08a24; }
 .index [data-c='atlas'] { --c: #3aa7c9; }
 .index [data-c='agentlab'] { --c: #ffffff; }
+.index [data-c='side'] { --c: #ff9a3c; }
 
 /* 프로젝트: 화면에 붙어 있는 동안 스크롤이 장면을 움직인다 */
 .projects { padding: 0 clamp(10px, 2vw, 28px); }
@@ -77,6 +78,38 @@ a.go:hover { transform: translateY(-2px); }
 .card-seoul { --card-bg: #0d1430; --card-ink: #f1f3ff; --card-muted: #a9b2d6; --card-line: #2a3564; --card-accent: #ffc857; --card-on-accent: #1a1405; }
 .card-atlas { --card-bg: #e9f0ee; --card-ink: #14303f; --card-muted: #4e6873; --card-line: #c2d2d0; --card-accent: #17627c; }
 .card-atlas h2 { font-weight: 600; }
+/* 사이드 게임: 세 게임 화면이 부채꼴로 펼쳐진다. 장면 전체가 /games/ 링크 */
+.card-side { --card-bg: #14110e; --card-ink: #f3ece2; --card-muted: #a39886; --card-line: #2e2720; --card-accent: #ff9a3c; --card-on-accent: #1a0f05; --scene-bg: radial-gradient(120% 90% at 50% 45%, #2a1f16 0%, #14110e 70%); }
+.card-side .facts > div { grid-template-columns: 9.4em 1fr; }
+.card-side .facts dt { color: var(--card-ink); font-weight: 600; }
+.scene-link { position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
+.scene-link:focus-visible { outline-offset: -6px; }
+
+/* 사이드 게임 페이지 (/games/) */
+.gpage { max-width: 1320px; margin: 0 auto; padding: clamp(40px, 8vh, 96px) clamp(18px, 4vw, 48px) clamp(48px, 8vh, 96px); }
+.gpage .back { font-size: 15px; color: var(--ink-2); text-underline-offset: 4px; }
+.gpage h1 { font-family: var(--display); font-weight: 800; font-size: clamp(40px, 6vw, 80px); line-height: 1.1; letter-spacing: -0.035em; margin-top: 18px; }
+.gpage .glede { max-width: 62ch; margin-top: 18px; font-size: clamp(16px, 1.4vw, 19px); color: var(--ink-2); }
+.glist { display: grid; gap: clamp(16px, 2.4vw, 28px); margin-top: clamp(32px, 6vh, 64px); }
+.gcard { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); border-radius: 28px; overflow: hidden; background: var(--card-bg); color: var(--card-ink); }
+.gcard .shot { display: flex; align-items: center; justify-content: center; padding: clamp(16px, 2.4vw, 32px); background: var(--shot-bg, rgba(0,0,0,.18)); }
+.gcard .shot img { width: 100%; height: auto; display: block; aspect-ratio: 16 / 10; border-radius: 14px; box-shadow: 0 18px 50px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.08); transition: transform .3s; }
+.gcard .shot:hover img { transform: translateY(-3px); }
+.gcard .copy { overflow: visible; justify-content: flex-start; }
+.gcard h2 { font-family: var(--card-display, var(--display)); font-weight: 800; font-size: clamp(30px, 3.4vw, 46px); line-height: 1.12; letter-spacing: -0.03em; }
+.gcard .facts > div { grid-template-columns: 5.4em 1fr; }
+.g-capy { --card-bg: #eef1e8; --card-ink: #1c2a1f; --card-muted: #5b6b5e; --card-line: #d3dbc9; --card-accent: #d9650f; --card-on-accent: #ffffff; --card-display: 'Jua', var(--body); --shot-bg: #e2e7da; }
+.g-capy h2 { font-weight: 400; letter-spacing: -0.01em; }
+.g-mouse { --card-bg: #14110e; --card-ink: #f3ece2; --card-muted: #a39886; --card-line: #2e2720; --card-accent: #ff9a3c; --card-on-accent: #1a0f05; }
+.g-mouse h2 { font-weight: 600; }
+.g-nexus { --card-bg: #120a1f; --card-ink: #f4eefe; --card-muted: #a99cc0; --card-line: #2f2147; --card-accent: #ff4fd8; --card-on-accent: #16061a; }
+.g-nexus .wins li:nth-child(2n) { border-left-color: #00f0ff; }
+.g-nexus .wins li:nth-child(2n) b { color: #00f0ff; }
+.links .muted { color: var(--card-muted); font-size: 14px; }
+@media (max-width: 900px) {
+  .gcard { grid-template-columns: 1fr; border-radius: 22px; }
+}
+
 .card-agentlab { --card-bg: #000000; --card-ink: #fafafa; --card-muted: #8c8c8c; --card-line: #242424; --card-accent: #ffffff; --card-on-accent: #000000; --card-warn: #fbbf24; --card-display: 'JetBrains Mono', ui-monospace, monospace; }
 .card-agentlab { box-shadow: inset 0 0 0 1px #262626; }
 .card-agentlab h2 { font-weight: 700; letter-spacing: -0.04em; }
@@ -189,6 +222,7 @@ body span[data-stat] { display: inline; margin: 0; font: inherit; color: inherit
 }
 @media (max-width: 1100px) {
   .rules { grid-template-columns: 1fr 1fr; }
+  .index { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 900px) {
   .pillars { grid-template-columns: 1fr; }
@@ -216,6 +250,7 @@ body span[data-stat] { display: inline; margin: 0; font: inherit; color: inherit
 }
 @media (max-width: 520px) {
   .index { grid-template-columns: 1fr; }
+  .card-side .facts > div { grid-template-columns: 1fr; gap: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
