@@ -265,6 +265,33 @@
     },
   };
 
+  // ---------- Equestrian: Fourbridge: 하늘에서 본 네 마을로 내려가다가, 광장 분수대 장면으로 넘어간다 (실제 게임 화면) ----------
+  const equestrian = {
+    shots: ['fourbridge-aerial', 'fourbridge-plaza'].map((id) => { const img = new Image(); img.decoding = 'async'; img.src = `/assets/portfolio/games/${id}.webp`; return img; }),
+    // 이미지를 장면에 꽉 채워 그린다. z는 확대, (fx, fy)는 확대 중심(이미지 비율 좌표)
+    cover(c, img, w, h, z, fx, fy) {
+      if (!img.complete || !img.naturalWidth) return;
+      const s = Math.max(w / img.naturalWidth, h / img.naturalHeight) * z, iw = img.naturalWidth * s, ih = img.naturalHeight * s;
+      const x = clamp(w / 2 - fx * iw, w - iw, 0), y = clamp(h / 2 - fy * ih, h - ih, 0);
+      c.drawImage(img, x, y, iw, ih);
+    },
+    draw(c, w, h, p, t) {
+      const [aerial, plaza] = this.shots, k = ease(0, 0.62, p), swap = ease(0.5, 0.72, p);
+      // 1) 하늘에서: 중앙 광장 쪽으로 천천히 다가간다
+      this.cover(c, aerial, w, h, 1.04 + k * 0.55 + Math.sin(t * 0.25) * 0.01, lerp(0.5, 0.42, k), lerp(0.5, 0.14, k));
+      // 2) 광장으로 내려선 장면
+      if (swap > 0) { c.globalAlpha = swap; this.cover(c, plaza, w, h, 1.12 - ease(0.6, 1, p) * 0.1, 0.5, 0.5); c.globalAlpha = 1; }
+      // 황금빛 저녁 빛
+      const g = c.createLinearGradient(0, 0, 0, h); g.addColorStop(0, 'rgba(255,214,150,.18)'); g.addColorStop(1, 'rgba(60,30,10,.22)');
+      c.fillStyle = g; c.fillRect(0, 0, w, h);
+      // 이름표
+      const fs = Math.max(12, Math.min(15, w / 52)), label = swap > 0.5 ? '포브리지 중앙 광장 · 마을 장로' : '포브리지 · 강으로 나뉜 네 마을과 다리';
+      c.font = `600 ${fs}px ${FONT}`; const tw = c.measureText(label).width, px = w * 0.04, py = h - h * 0.05 - fs * 2.2;
+      c.fillStyle = 'rgba(40,26,12,.62)'; rr(c, px, py, tw + fs * 1.8, fs * 2.2, fs * 1.1); c.fill();
+      c.fillStyle = '#fff4e0'; c.textAlign = 'left'; c.textBaseline = 'middle'; c.fillText(label, px + fs * 0.9, py + fs * 1.1);
+    },
+  };
+
   // ---------- 사이드 게임: 세 게임의 실제 화면이 겹쳐 있다가 부채꼴로 펼쳐진다 ----------
   const side = {
     games: [['capy', '카피좀비'], ['mouse', '쥐구멍에도 볕 들 날'], ['nexus', 'NEXUS-77']].map(([id, name]) => {
@@ -299,7 +326,7 @@
   };
 
   // ---------- 엔진 ----------
-  const defs = { jelly, seoul, atlas, agentlab, side };
+  const defs = { jelly, seoul, atlas, agentlab, side, equestrian };
   const scenes = [...document.querySelectorAll('.pin[data-scene]')].map((pin) => {
     const canvas = pin.querySelector('canvas');
     return { pin, canvas, ctx: canvas.getContext('2d'), def: defs[pin.dataset.scene], state: {}, w: 0, h: 0, p: 0, sp: reduce ? 0.86 : 0, visible: false, ptr: null };

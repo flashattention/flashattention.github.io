@@ -37,7 +37,7 @@ ul, ol { list-style: none; }
 @keyframes rise { to { transform: none; } }
 .lede { max-width: 62ch; margin-top: clamp(22px, 4vh, 40px); font-size: clamp(17px, 1.5vw, 20px); color: var(--ink-2); opacity: 0; animation: fade 0.8s 0.7s forwards; }
 @keyframes fade { to { opacity: 1; } }
-.index { margin-top: clamp(36px, 7vh, 72px); display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--ink); opacity: 0; animation: fade 0.8s 0.9s forwards; }
+.index { margin-top: clamp(36px, 7vh, 72px); display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--ink); opacity: 0; animation: fade 0.8s 0.9s forwards; }
 .index a { display: block; padding: 16px 16px 18px 0; text-decoration: none; border-bottom: 1px solid var(--line); height: 100%; position: relative; }
 .index a::before { content: ''; position: absolute; left: 0; top: -1px; height: 3px; width: 0; background: var(--c); transition: width 0.35s; }
 .index a:hover::before, .index a:focus-visible::before { width: calc(100% - 16px); }
@@ -48,6 +48,7 @@ ul, ol { list-style: none; }
 .index [data-c='atlas'] { --c: #3aa7c9; }
 .index [data-c='agentlab'] { --c: #ffffff; }
 .index [data-c='side'] { --c: #ff9a3c; }
+.index [data-c='equestrian'] { --c: #e3a04a; }
 
 /* 프로젝트: 화면에 붙어 있는 동안 스크롤이 장면을 움직인다 */
 .projects { padding: 0 clamp(10px, 2vw, 28px); }
@@ -78,6 +79,10 @@ a.go:hover { transform: translateY(-2px); }
 .card-seoul { --card-bg: #0d1430; --card-ink: #f1f3ff; --card-muted: #a9b2d6; --card-line: #2a3564; --card-accent: #ffc857; --card-on-accent: #1a1405; }
 .card-atlas { --card-bg: #e9f0ee; --card-ink: #14303f; --card-muted: #4e6873; --card-line: #c2d2d0; --card-accent: #17627c; }
 .card-atlas h2 { font-weight: 600; }
+/* Equestrian: Fourbridge — 황금빛 저녁 톤. 장면은 실제 게임 화면(하늘에서 본 마을 → 광장) */
+.card-equestrian { --card-bg: #fbf3e3; --card-ink: #3b2a19; --card-muted: #86694c; --card-line: #ead8b9; --card-accent: #b8641f; --card-on-accent: #fffaf0; --scene-bg: #e9d3ad; }
+.card-equestrian h2 { font-weight: 800; letter-spacing: -0.035em; }
+
 /* 사이드 게임: 세 게임 화면이 부채꼴로 펼쳐진다. 장면 전체가 /games/ 링크 */
 .card-side { --card-bg: #14110e; --card-ink: #f3ece2; --card-muted: #a39886; --card-line: #2e2720; --card-accent: #ff9a3c; --card-on-accent: #1a0f05; --scene-bg: radial-gradient(120% 90% at 50% 45%, #2a1f16 0%, #14110e 70%); }
 .card-side .facts > div { grid-template-columns: 9.4em 1fr; }
